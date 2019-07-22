@@ -3,7 +3,8 @@ import Login from './components/Login'
 import Layout from './components/Layout'
 import './index.css';
 
-function App() {
+function App(props) {
+  console.log(props)
   return (
     <Layout>
       <Login />
