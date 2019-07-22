@@ -18,7 +18,7 @@ class Login extends React.Component {
     render(){
         return (
           <div className="justify-center flex border-black border items-center h-screen">
-            <div className="w-64 bg-gray-500 w-1/2 p-24">
+            <div className="w-64 bg-gray-500 w-1/2 p-20">
               <div>Monitor</div>
               <div>Sign In to Your Audition</div>
               <label
