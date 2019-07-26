@@ -6,7 +6,7 @@ class AppointmentScrollTab extends Component {
   render() {
     return (
       <>
-        <div className="w-full h-48 justify-between border-black bg-gray opacity-50 border flex flex-col p-2">
+        <div className="w-full h-48 justify-between border-black bg-gray-500 border flex flex-col p-2">
           <div className="">
             <div className="flex text-xl justify-between">
               <div className="flex">
@@ -38,12 +38,12 @@ class AppointmentScrollTab extends Component {
           <div>
             <div className="flex justify-around mb-4">
               <div>
-                <label className="border border-black rounded-lg p-4">
+                <label className="shadow-lg bg-blue-300 text-white border border-black rounded-lg p-4">
                   Monologues
                 </label>
               </div>
               <div>
-                <label className="border border-black rounded-lg p-4">
+                <label className="shadow-lg bg-blue-300 text-white border border-black rounded-lg p-4">
                   Songs
                 </label>
               </div>
