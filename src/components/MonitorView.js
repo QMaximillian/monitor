@@ -2,17 +2,29 @@ import React, { Component } from "react";
 import AppointmentScroll from "./AppointmentScroll";
 import MessageBlast from "./MessageBlast";
 import MonitorControlCenter from "./MonitorControlCenter";
-import CastingForm from "./CastingForm";
-
+import MessageContainer from "./MessageContainer";
+import TextBox from "./TextBox";
+import ActorProfileContainer from './ActorProfileContainer'
+import ChatContainer from './ChatContainer'
 class MonitorView extends Component {
   render() {
     return (
       <div className="flex">
         <AppointmentScroll />
         <MonitorControlCenter>
-          <div className="flex flex-col justify-between">
-            <MessageBlast />
-            <CastingForm />
+          <div className="flex flex-col justify-between w-full">
+            <MessageBlast>
+              <div className="flex flex-col w-full p-4">
+                <TextBox />
+                <MessageContainer />
+              </div>
+            </MessageBlast>
+            <div className="h-full flex flex-row justify-center w-full">
+
+                <ActorProfileContainer />
+                <ChatContainer />
+              </div>
+
           </div>
         </MonitorControlCenter>
       </div>
