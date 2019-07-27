@@ -5,20 +5,26 @@ import Home from './components/Home'
 import MonitorView from './components/MonitorView'
 import './index.css';
 import { Router, Redirect } from "@reach/router";
-import getToken from './components/ProtectedRoutes'
+import jwt from "jsonwebtoken";
 
+function AuthRoute(props){
+  // console.log(props.client)
+  const authToken = localStorage.getItem('token')
+  if (!authToken) {
+    return <Redirect noThrow to={"/login"} />;
+  }
 
-function AuthRoute(props) {
-  // console.log(props)
-          // if (props) {
-            return props.render
-          // }
-          // return <Redirect noThrow to='login'/>
-          
+  const authenticate = jwt.verify(authToken, 'frindle')
+
+  if (authenticate.id) {
+    return props.render 
+  } else {
+    return <Redirect noThrow to={'/login'}/>
+  }
 }
 
-
 function App(props) {
+
   return (
     <Layout>
       <Router>
@@ -31,4 +37,4 @@ function App(props) {
 }
 
 
-export default App;
+export default App

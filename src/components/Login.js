@@ -21,7 +21,7 @@ class Login extends React.Component {
     
     render(){
       let variableConfig = {variables: {email: this.state.email.value, password: this.state.password.value}}
-      console.log(variableConfig)
+
         return (
           <Mutation mutation={LOGIN}>
             {(login) => {
@@ -68,9 +68,11 @@ class Login extends React.Component {
                             const { data } = await login({
                               ...variableConfig
                             });
-
+                            
                             if (data && data.login && data.login.token) {
+                              console.log(data)
                               localStorage.setItem('token', data.login.token)
+                              localStorage.setItem('id', data.login.id)
                               navigate(`/monitor-view`);
                             }
                           

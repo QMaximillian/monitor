@@ -6,6 +6,8 @@ import MessageContainer from "./MessageContainer";
 import TextBox from "./TextBox";
 import ActorProfileContainer from './ActorProfileContainer'
 import ChatContainer from './ChatContainer'
+// import withApollo from 'react-apollo'
+
 class MonitorView extends Component {
   
 
