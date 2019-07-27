@@ -18,6 +18,7 @@ class Login extends React.Component {
             }
         })
     }
+    
     render(){
       let variableConfig = {variables: {email: this.state.email.value, password: this.state.password.value}}
       console.log(variableConfig)
@@ -60,7 +61,7 @@ class Login extends React.Component {
                       />
                       <button
                         onClick={async e => {
-                          try {
+
                             e.preventDefault();
                             e.stopPropagation();
 
@@ -68,12 +69,11 @@ class Login extends React.Component {
                               ...variableConfig
                             });
 
-                            if (data.login.token) {
-                              navigate(`/home`);
+                            if (data && data.login && data.login.token) {
+                              localStorage.setItem('token', data.login.token)
+                              navigate(`/monitor-view`);
                             }
-                          } catch (error) {
-                            throw new Error(error);
-                          }
+                          
                         }}
                       >
                         Submit
@@ -91,6 +91,7 @@ class Login extends React.Component {
 const LOGIN = gql`
   mutation login($email: String!, $password: String!) { 
     login(email: $email, password: $password) {
+      id
       first_name
       last_name
       token

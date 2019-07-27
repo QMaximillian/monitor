@@ -6,15 +6,14 @@ import MonitorView from './components/MonitorView'
 import './index.css';
 import { Router, Redirect } from "@reach/router";
 import getToken from './components/ProtectedRoutes'
-import { ApolloConsumer } from "react-apollo";
 
 
 function AuthRoute(props) {
-  let user = false
-          if (user) {
+  // console.log(props)
+          // if (props) {
             return props.render
-          }
-          return <Redirect noThrow to='login'/>
+          // }
+          // return <Redirect noThrow to='login'/>
           
 }
 
@@ -24,17 +23,11 @@ function App(props) {
     <Layout>
       <Router>
         <Login path="/login" />
-        <MonitorView path='/monitor-view'/>
+        <AuthRoute path="/monitor-view" render={<MonitorView />} />
         <AuthRoute path="/home" render={<Home />} />
       </Router>
     </Layout>
   );
-}
-
-async function authRoutes() {
-  if (localStorage.getItem('token')) {
-    return <Home path="/home"/>;
-  }
 }
 
 
