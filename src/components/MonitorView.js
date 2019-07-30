@@ -6,7 +6,7 @@ import MessageContainer from "./MessageContainer";
 import TextBox from "./TextBox";
 import ActorProfileContainer from './ActorProfileContainer'
 import ChatContainer from './ChatContainer'
-// import withApollo from 'react-apollo'
+import {ViewerIdContext} from '../App'
 
 class MonitorView extends Component {
   
@@ -26,29 +26,31 @@ class MonitorView extends Component {
   
   render() {
     return (
-      <div className="flex">
-        <AppointmentScroll />
-        <MonitorControlCenter>
-          <div className="flex flex-col justify-between w-full">
-            <MessageBlast>
-              <div className="flex flex-col w-full p-4">
-                <TextBox
-                  name="message"
-                  type="text"
-                  placeholder="Send a message to all"
-                  value={this.state.message.value}
-                  onChange={this.handleInputChange}
-                />
-                <MessageContainer />
+      <ViewerIdContext.Consumer>
+        {value => (<div className="flex">{console.log('MonitorView', value.id)}
+          <AppointmentScroll />
+          <MonitorControlCenter>
+            <div className="flex flex-col justify-between w-full">
+              <MessageBlast>
+                <div className="flex flex-col w-full p-4">
+                  <TextBox
+                    name="message"
+                    type="text"
+                    placeholder="Send a message to all"
+                    value={this.state.message.value}
+                    onChange={this.handleInputChange}
+                  />
+                  <MessageContainer />
+                </div>
+              </MessageBlast>
+              <div className="h-full flex flex-row justify-center w-full">
+                <ActorProfileContainer />
+                <ChatContainer />
               </div>
-            </MessageBlast>
-            <div className="h-full flex flex-row justify-center w-full">
-              <ActorProfileContainer />
-              <ChatContainer />
             </div>
-          </div>
-        </MonitorControlCenter>
-      </div>
+          </MonitorControlCenter>
+        </div>)}
+      </ViewerIdContext.Consumer>
     );
   }
 }

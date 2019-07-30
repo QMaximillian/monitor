@@ -6,9 +6,12 @@ import MonitorView from './components/MonitorView'
 import './index.css';
 import { Router, Redirect } from "@reach/router";
 import jwt from "jsonwebtoken";
+import { getViewerId } from './lib/helpers'
+// import { Query } from 'react-apollo'
+// import gql from 'graphql-tag'
 
 function AuthRoute(props){
-  // console.log(props.client)
+
   const authToken = localStorage.getItem('token')
   if (!authToken) {
     return <Redirect noThrow to={"/login"} />;
@@ -23,18 +26,34 @@ function AuthRoute(props){
   }
 }
 
+
+
+export const ViewerIdContext = React.createContext();
 function App(props) {
 
+  const value = {
+    id: getViewerId()
+  }
+
   return (
-    <Layout>
-      <Router>
-        <Login path="/login" />
-        <AuthRoute path="/monitor-view" render={<MonitorView />} />
-        <AuthRoute path="/home" render={<Home />} />
-      </Router>
-    </Layout>
+          <ViewerIdContext.Provider value={value}>
+            <Layout>
+              <Router>
+                <Login path="/login" />
+                <AuthRoute path="/monitor-view" render={<MonitorView />} />
+                <AuthRoute path="/home" render={<Home />} />
+              </Router>
+            </Layout>
+          </ViewerIdContext.Provider>
   );
 }
 
+// const GET_VIEWER = gql`
+//     query viewer($id: String!) {
+//       user(id: $id) {
+//         first_name
+//         last_name
+//     }
+//   }`
 
 export default App

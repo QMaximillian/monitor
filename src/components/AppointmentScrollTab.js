@@ -66,7 +66,8 @@ AppointmentScrollTab.propTypes = {
     equity: PropTypes.bool.isRequired,
     gender: PropTypes.string.isRequired,
     monologues: PropTypes.array,
-    songs: PropTypes.array
+    songs: PropTypes.array,
+    key: PropTypes.number
   }),
   appointmentTime: PropTypes.any.isRequired,
   auditionInterval: PropTypes.number.isRequired

@@ -72,8 +72,8 @@ class Login extends React.Component {
                             if (data && data.login && data.login.token) {
                               console.log(data)
                               localStorage.setItem('token', data.login.token)
-                              localStorage.setItem('id', data.login.id)
-                              navigate(`/monitor-view`);
+                              navigate(`/home`)
+                              
                             }
                           
                         }}
