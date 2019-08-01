@@ -28,15 +28,11 @@ function AuthRoute(props){
 
 
 
-export const ViewerIdContext = React.createContext();
+
 function App(props) {
 
-  const value = {
-    id: getViewerId()
-  }
-
   return (
-          <ViewerIdContext.Provider value={value}>
+
             <Layout>
               <Router>
                 <Login path="/login" />
@@ -44,7 +40,6 @@ function App(props) {
                 <AuthRoute path="/home" render={<Home />} />
               </Router>
             </Layout>
-          </ViewerIdContext.Provider>
   );
 }
 

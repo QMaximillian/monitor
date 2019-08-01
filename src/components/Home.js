@@ -1,11 +1,14 @@
 import React from 'react'
+import { Query } from 'react-apollo'
+class Home extends React.Component {
 
-function Home(props){
-    return (
-        <div>
-            Home
-        </div>
-    )
+    render() {
+        return (
+            <div>
+                Home
+            </div>
+        )
+    }
 }
 
 export default Home

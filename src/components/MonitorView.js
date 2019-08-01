@@ -6,7 +6,7 @@ import MessageContainer from "./MessageContainer";
 import TextBox from "./TextBox";
 import ActorProfileContainer from './ActorProfileContainer'
 import ChatContainer from './ChatContainer'
-import {ViewerIdContext} from '../App'
+
 
 class MonitorView extends Component {
   
@@ -26,8 +26,7 @@ class MonitorView extends Component {
   
   render() {
     return (
-      <ViewerIdContext.Consumer>
-        {value => (<div className="flex">{console.log('MonitorView', value.id)}
+        <div className="flex">
           <AppointmentScroll />
           <MonitorControlCenter>
             <div className="flex flex-col justify-between w-full">
@@ -49,9 +48,8 @@ class MonitorView extends Component {
               </div>
             </div>
           </MonitorControlCenter>
-        </div>)}
-      </ViewerIdContext.Consumer>
-    );
+        </div>
+    )
   }
 }
 

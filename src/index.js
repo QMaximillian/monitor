@@ -21,21 +21,12 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      AUTHORIZATION: token ? token : ""
+      'Content-Type': 'application/json',
+      'Authorization': token ? `Bearer ${token}` : ""
     }
   };
 });
 
-
-
-// const httpLink = new HttpLink({
-//   uri: MONITOR_BASE_URL,
-// //   headers: {
-// //     authorization: `
-// //       process.env.REACT_APP_MONITOR_PERSONAL_ACCESS_TOKEN
-// //     }`
-// //   }
-// });
 
 const client = new ApolloClient({
     link: authLink.concat(httpLink),
