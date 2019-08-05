@@ -7,7 +7,8 @@ import { Redirect } from 'react-router-dom'
 class Login extends React.Component {
     state = {
         email: {value: '', isValid: false},
-        password: {value: '', isValid: false}
+        password: {value: '', isValid: false},
+        redirect: false
     }
     
     handleInputChange = ({ value, name, isValid }) => {
@@ -61,25 +62,34 @@ class Login extends React.Component {
                       />
                       <button
                         onClick={async e => {
+                          e.preventDefault();
+                          e.stopPropagation();
 
-                            e.preventDefault();
-                            e.stopPropagation();
-
-                            const { data } = await login({
-                              ...variableConfig
+                          const { data } = await login({
+                            ...variableConfig
+                          });
+                          console.log(data);
+                          if (
+                            data &&
+                            data.login &&
+                            data.login.token
+                          ) {
+                            localStorage.setItem(
+                              "token",
+                              data.login.token
+                            );
+                            this.setState({
+                              redirect: true
                             });
-                            console.log(data)
-                            if (data && data.login && data.login.token) {
-                              localStorage.setItem('token', data.login.token)
-                               this.props.history.push('/home')
-                            }
-                          
+                          }
                         }}
                       >
                         Submit
                       </button>
+                      
                     </div>
                   </div>
+                  {this.state.redirect ? <Redirect to={"/home"} push /> : null}
                 </div>
               );
             }}
