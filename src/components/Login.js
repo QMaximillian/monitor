@@ -2,7 +2,7 @@ import React from 'react'
 import TextBox from './TextBox'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
-import { navigate } from '@reach/router'
+import { Redirect } from 'react-router-dom'
 
 class Login extends React.Component {
     state = {
@@ -68,12 +68,10 @@ class Login extends React.Component {
                             const { data } = await login({
                               ...variableConfig
                             });
-                            
+                            console.log(data)
                             if (data && data.login && data.login.token) {
-                              console.log(data)
                               localStorage.setItem('token', data.login.token)
-                              navigate(`/home`)
-                              
+                               this.props.history.push('/home')
                             }
                           
                         }}
