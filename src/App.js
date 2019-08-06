@@ -54,6 +54,7 @@ function App(props) {
                     component={MonitorView}
                   />
                   <PrivateRoute exact path="/home" component={Home}/>
+                  <PrivateRoute exact path="/monitor-audition/:id" component={MonitorView}/>
                 </Switch>
               </Router>
             </Layout>

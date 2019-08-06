@@ -20,6 +20,32 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
+
+  .tile-grid {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-template-rows: auto;
+  }
+
+  .tile-grid-2, .tile-grid-4, .tile-grid-5 {
+    grid-gap: 0rem;
+    grid-template-rows: none;
+    grid-auto-rows: 160px;
+  }
+
+  .tile-grid-2 {
+    grid-template-columns: 50% 50%;
+  }
+
+  .tile-grid-4 {
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+
+  .tile-grid-5 {
+    grid-template-columns: 20% 20% 20% 20% 20%;
+  }
+
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */

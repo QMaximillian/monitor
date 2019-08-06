@@ -6,6 +6,8 @@ import MessageContainer from "./MessageContainer";
 import TextBox from "./TextBox";
 import ActorProfileContainer from './ActorProfileContainer'
 import ChatContainer from './ChatContainer'
+import gql from 'graphql-tag'
+import { Query } from "react-apollo"
 
 
 class MonitorView extends Component {
@@ -25,7 +27,9 @@ class MonitorView extends Component {
   };
   
   render() {
+    console.log(this.props)
     return (
+      // <Query query={GET_VIEWER_MONITOR_VIEW}>
         <div className="flex">
           <AppointmentScroll />
           <MonitorControlCenter>
@@ -49,8 +53,18 @@ class MonitorView extends Component {
             </div>
           </MonitorControlCenter>
         </div>
-    )
+      // </Query>
+    );
   }
 }
+
+// const GET_VIEWER_MONITOR_VIEW = gql`
+//   query Audition($id: ID!){
+//     getMonitorView(id: $id) {
+    // # query auditions for the appointments under that audition_id
+    // # return the auditions in ascending order
+//     }
+//   }
+// `
 
 export default MonitorView;
