@@ -1,12 +1,14 @@
 import React from 'react'
-import { Query } from 'react-apollo'
-import {getViewerId} from '../lib/helpers'
+import { useQuery } from "@apollo/react-hooks";
 import gql from 'graphql-tag'
 import { Link } from "react-router-dom";
+import { getUserId } from '../lib/helpers';
 
-class Home extends React.Component {
+function Home(){
+  const id = getUserId()
+  console.log(id)
+const { loading, data } = useQuery(GET_VIEWER_HOME, { variables: { id } });
 
-    render() {
                 return (
                   <div className="w-full flex items-center justify-center pb-6">
                     <div className="tile-grid w-full tile-grid-2 sm:tile-grid-4 md:tile-grid-5">
@@ -29,7 +31,24 @@ class Home extends React.Component {
                   </div>
                 );
     }
-  }
+
+    const GET_VIEWER_HOME = gql`
+      query user($id: ID!) {
+        user(id: $id) {
+          id
+          first_name
+          last_name
+          email
+          phone_number
+          gender
+          equity
+          monitor_auditions {
+            id
+            show_name
+          }
+        }
+      }
+    `;
 
 export default Home
 

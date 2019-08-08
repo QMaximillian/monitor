@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Login from './components/Login'
 import Layout from './components/Layout'
 import Home from './components/Home'
@@ -6,7 +6,6 @@ import MonitorView from './components/MonitorView'
 import './index.css';
 import jwt from "jsonwebtoken";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import { getViewerId } from './lib/helpers';
 
@@ -46,57 +45,49 @@ function PrivateRoute({ component: Component, ...rest }) {
 
 
 function App(props) {
-
-  const { loading, error, data } = useQuery(GET_VIEWER_HOME, {variables: {id: getViewerId()}})
   const [redirect, setRedirect] = useState(false)
-  if (loading) return 'Loading...'
-  if (error)
             return (
               <Layout>
                 <Router>
                   <Switch>
                     <Route exact path="/login" component={Login} />
-                    <Route component={(props) => {
-                      return (
-                        <div>
-                          <div>No Match</div>
-                          <button onClick={() => setRedirect(true)}>Go To Login</button>
-                          {redirect ? <Redirect to="/login"/> : null}
-                        </div>
-                      )
-                    }}/>
-                    {data && 
-                      <React.Fragment>
-                      <PrivateRoute exact
+                    <PrivateRoute
+                      exact
                       path="/monitor-view"
                       component={MonitorView}
-                      />
-                      <PrivateRoute exact path="/home" component={Home}/>
-                      <PrivateRoute exact path="/monitor-audition/:id" component={MonitorView}/>
-                    </React.Fragment>
-                    }
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/home"
+                      component={Home}
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/monitor-audition/:id"
+                      component={MonitorView}
+                    />
+                    <Route
+                      exact
+                      component={props => {
+                        return (
+                          <div>
+                            <div>No Match</div>
+                            <button
+                              onClick={() => setRedirect(true)}
+                            >
+                              Go To Login
+                            </button>
+                            {redirect ? (
+                              <Redirect to="/login" />
+                            ) : null}
+                          </div>
+                        );
+                      }}
+                    />
                   </Switch>
                 </Router>
               </Layout>
-            )
+            );
   }
-
-const GET_VIEWER_HOME = gql`
-  query user($id: ID!) {
-    user(id: $id) {
-      id
-      first_name
-      last_name
-      email
-      phone_number
-      gender
-      equity
-      monitor_auditions {
-        id
-        show_name
-      }
-    }
-  }
-`;
 
 export default App
