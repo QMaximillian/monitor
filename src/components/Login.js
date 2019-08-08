@@ -11,7 +11,7 @@ function Login(props){
   const [email, setEmail] = useState({value: '', isValid: false})
   const [password, setPassword] = useState({value: '', isValid: false})
   const [redirect, setRedirect] = useState(false)
-  const [login, { loading, data }] = useMutation(LOGIN, {
+  const [login, { loading, data, onCompleted }] = useMutation(LOGIN, {
     variables: {
       email: email.email && email.email.value,
       password: password.password && password.password.value
@@ -73,19 +73,27 @@ function Login(props){
                         onClick={async e => {
                           e.preventDefault();
 
-                          await login();
-                          if (
-                            data &&
-                            data.login &&
-                            data.login.token
-                          ) {
-                            localStorage.setItem(
-                              "token",
-                              data.login.token
-                            );
-                          setRedirect(true)
-                          }
-                        }}
+                          
+                          const result = await login()
+                          console.log();
+                              if (
+                                result &&
+                                result.data &&
+                                result.data.login &&
+                                result.data.login.token
+                              ) {
+                                localStorage.setItem(
+                                  "token",
+                                  result.data.login.token
+                                );
+                                setRedirect(true);
+                              } else {
+                                alert(
+                                  "Not valid login"
+                                );
+                              }
+                              
+                          }}
                       >
                         Submit
                       </button>
