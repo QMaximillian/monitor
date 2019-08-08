@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Login from './components/Login'
 import Layout from './components/Layout'
 import Home from './components/Home'
 import MonitorView from './components/MonitorView'
 import './index.css';
 import jwt from "jsonwebtoken";
-import gql from "graphql-tag";
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
-import { getViewerId } from './lib/helpers';
 
 
 
