@@ -24,6 +24,7 @@ class Home extends React.Component {
                           );
                         }
                       )} */}
+                      Hello
                     </div>
                   </div>
                 );

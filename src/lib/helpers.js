@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import jwt from "jsonwebtoken";
 
 export const getViewerId = () => {
@@ -7,3 +8,9 @@ export const getViewerId = () => {
         return token
     }
 }
+
+// function useRedirect(){
+//     const [redirect, setRedirect] = useState(false)
+
+//     return 
+// }

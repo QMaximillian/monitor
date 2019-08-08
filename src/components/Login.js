@@ -11,7 +11,7 @@ function Login(props){
   const [email, setEmail] = useState({value: '', isValid: false})
   const [password, setPassword] = useState({value: '', isValid: false})
   const [redirect, setRedirect] = useState(false)
-  const [login, { loading, data, onCompleted }] = useMutation(LOGIN, {
+  const [login, { loading }] = useMutation(LOGIN, {
     variables: {
       email: email.email && email.email.value,
       password: password.password && password.password.value
@@ -72,31 +72,33 @@ function Login(props){
                       <button
                         onClick={async e => {
                           e.preventDefault();
-
-                          
                           const result = await login()
-                          console.log();
+                          try {
                               if (
                                 result &&
                                 result.data &&
-                                result.data.login &&
-                                result.data.login.token
+                                result.data
+                                  .login &&
+                                result.data.login
+                                  .token
                               ) {
                                 localStorage.setItem(
                                   "token",
-                                  result.data.login.token
+                                  result.data
+                                    .login.token
                                 );
                                 setRedirect(true);
-                              } else {
-                                alert(
-                                  "Not valid login"
-                                );
-                              }
+                              } 
+                          } catch(error) {
+                            console.log(error)
+                          }
+
                               
                           }}
                       >
                         Submit
                       </button>
+                      {loading ? 'Loading...' : null}
                     </div>
                   </div>
                   {redirect ? (

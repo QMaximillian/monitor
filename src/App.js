@@ -47,26 +47,34 @@ function PrivateRoute({ component: Component, ...rest }) {
 
 function App(props) {
 
-
-// const { loading, error, data } = useQuery(GET_VIEWER_HOME, {
-//   variables: { id: '51215840-b68f-4a4f-95f4-42aa5fde630f' }
-// });
-
-  // const [id, setId] = useState(getViewerId())
-  // console.log(id)
-  // if (error) return null
-  // if (loading) return 'Loading...'
+  const { loading, error, data } = useQuery(GET_VIEWER_HOME, {variables: {id: getViewerId()}})
+  const [redirect, setRedirect] = useState(false)
+  if (loading) return 'Loading...'
+  if (error)
             return (
               <Layout>
                 <Router>
                   <Switch>
                     <Route exact path="/login" component={Login} />
-                    <PrivateRoute exact
+                    <Route component={(props) => {
+                      return (
+                        <div>
+                          <div>No Match</div>
+                          <button onClick={() => setRedirect(true)}>Go To Login</button>
+                          {redirect ? <Redirect to="/login"/> : null}
+                        </div>
+                      )
+                    }}/>
+                    {data && 
+                      <React.Fragment>
+                      <PrivateRoute exact
                       path="/monitor-view"
                       component={MonitorView}
-                    />
-                    <PrivateRoute exact path="/home" component={Home}/>
-                    <PrivateRoute exact path="/monitor-audition/:id" component={MonitorView}/>
+                      />
+                      <PrivateRoute exact path="/home" component={Home}/>
+                      <PrivateRoute exact path="/monitor-audition/:id" component={MonitorView}/>
+                    </React.Fragment>
+                    }
                   </Switch>
                 </Router>
               </Layout>
