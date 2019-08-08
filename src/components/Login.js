@@ -1,31 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TextBox from './TextBox'
 import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
+import { useMutation } from '@apollo/react-hooks'
 import { Redirect } from 'react-router-dom'
 
-class Login extends React.Component {
-    state = {
-        email: {value: '', isValid: false},
-        password: {value: '', isValid: false},
-        redirect: false
-    }
-    
-    handleInputChange = ({ value, name, isValid }) => {
-        this.setState({
-            [name]: {
-                value,
-                isValid
-            }
-        })
-    }
-    
-    render(){
-      let variableConfig = {variables: {email: this.state.email.value, password: this.state.password.value}}
+function Login(props){
+  
 
-        return (
-          <Mutation mutation={LOGIN}>
-            {(login) => {
+  
+  const [email, setEmail] = useState({value: '', isValid: false})
+  const [password, setPassword] = useState({value: '', isValid: false})
+  const [redirect, setRedirect] = useState(false)
+  const [login, { loading }] = useMutation(LOGIN, {
+    variables: {
+      email: email.email && email.email.value,
+      password: password.password && password.password.value
+    }
+  });
+
+
+      
+
               return (
                 <div className="justify-center flex border-black border items-center h-screen">
                   <div className="bg-gray-500 mx-auto py-8 px-32 shadow-2xl rounded-lg">
@@ -43,8 +38,15 @@ class Login extends React.Component {
                           name="email"
                           type="email"
                           placeholder="Email"
-                          value={this.state.email.value}
-                          onChange={this.handleInputChange}
+                          value={email.email && email.email.value}
+                          onChange={({ name, isValid, value }) =>
+                            setEmail({
+                              [name]: {
+                                value,
+                                isValid
+                              }
+                            })
+                          }
                         />
                       </div>
                       <label
@@ -57,46 +59,55 @@ class Login extends React.Component {
                         name="password"
                         type="password"
                         placeholder="Password"
-                        value={this.state.password.value}
-                        onChange={this.handleInputChange}
+                        value={password.password && password.password.value}
+                        onChange={({ name, isValid, value }) =>
+                          setPassword({
+                            [name]: {
+                              value,
+                              isValid
+                            }
+                          })
+                        }
                       />
                       <button
                         onClick={async e => {
                           e.preventDefault();
-                          e.stopPropagation();
-
-                          const { data } = await login({
-                            ...variableConfig
-                          });
-                          console.log(data);
-                          if (
-                            data &&
-                            data.login &&
-                            data.login.token
-                          ) {
-                            localStorage.setItem(
-                              "token",
-                              data.login.token
-                            );
-                            this.setState({
-                              redirect: true
-                            });
+                          const result = await login()
+                          try {
+                              if (
+                                result &&
+                                result.data &&
+                                result.data
+                                  .login &&
+                                result.data.login
+                                  .token
+                              ) {
+                                localStorage.setItem(
+                                  "token",
+                                  result.data
+                                    .login.token
+                                );
+                                setRedirect(true);
+                              } 
+                          } catch(error) {
+                            console.log(error)
                           }
-                        }}
+
+                              
+                          }}
                       >
                         Submit
                       </button>
-                      
+                      {loading ? 'Loading...' : null}
                     </div>
                   </div>
-                  {this.state.redirect ? <Redirect to={"/home"} push /> : null}
+                  {redirect ? (
+                    <Redirect to={"/home"} push />
+                  ) : null}
                 </div>
               );
-            }}
-          </Mutation>
-        );
     }   
-}
+
 
 const LOGIN = gql`
   mutation login($email: String!, $password: String!) { 

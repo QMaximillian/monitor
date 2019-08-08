@@ -1,8 +1,22 @@
+
 import jwt from "jsonwebtoken";
 
-export const getViewerId = () => {
-    if (localStorage.getItem('token')) {
+
+
+export function getUserId() {
+
+
+     if (localStorage.getItem('token')) {
         const token = jwt.verify(localStorage.getItem("token"), "frindle")
-        return token
+        return token.id
+
     }
+
+  
 }
+
+// function useRedirect(){
+//     const [redirect, setRedirect] = useState(false)
+
+//     return 
+// }
