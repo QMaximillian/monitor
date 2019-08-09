@@ -9,7 +9,7 @@ export default function HomeSearch(props){
   }})
 
     return (
-        <div id="left-side" className="w-2/3 h-full">
+        <div id="left-side" className="w-full h-full">
                       <div className="px-2">
                         <TextBox
                           type="text"
