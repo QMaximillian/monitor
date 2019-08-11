@@ -24,7 +24,7 @@ export default function HomeSearch(props){
           />
           <div className="px-2">
             <div className="flex flex-wrap -mx-2 border-black border">
-              {props.monitor_auditions.map(audition => {
+              {props.monitor_auditions.filter((audition) => (audition.show_name.match(search.search.value))).map(audition => {
                 return (
                   <div
                     className="w-1/2 p-4 flex justify-center"
@@ -38,7 +38,9 @@ export default function HomeSearch(props){
                     </Link>
                   </div>
                 );
-              })}
+              })
+              
+              }
             </div>
           </div>
         </div>

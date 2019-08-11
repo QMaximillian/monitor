@@ -14,7 +14,10 @@ function Home(){
                 return (
                   <div className="flex w-screen h-screen">
                     <div className="w-1/6">
-                      OPTIONS
+                      <div id="filters">
+                        <div>ASC</div>
+                        <div>DESC</div>
+                      </div>
                     </div>
                     <div className="w-3/6 overflow-auto-y">
                       <HomeSearch
@@ -24,7 +27,11 @@ function Home(){
                       />
                     </div>
                     <div id="right-side" className="w-2/6">
-                      <UpcomingAudition audition={data.user.monitor_auditions[0]}/>
+                      <UpcomingAudition
+                        audition={
+                          data.user.monitor_auditions[0]
+                        }
+                      />
                     </div>
                   </div>
                 );
