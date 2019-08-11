@@ -3,6 +3,7 @@ import TextBox from './TextBox'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { Redirect } from 'react-router-dom'
+import { useSpring, animated } from 'react-spring'
 
 function Login(props){
   
@@ -17,12 +18,18 @@ function Login(props){
       password: password.password && password.password.value
     }
   });
+  const fade = useSpring({
+    from: {
+      opacity: 0
+    },
+    opacity: 1
+  })
 
 
       
 
               return (
-                <div className="justify-center flex border-black border items-center h-screen">
+                <animated.div style={fade} className="justify-center flex border-black border items-center h-screen">
                   <div className="bg-gray-500 mx-auto py-8 px-32 shadow-2xl rounded-lg">
                     <div className="flex flex-col flex-1 items-center">
                       <div>Monitor</div>
@@ -104,7 +111,7 @@ function Login(props){
                   {redirect ? (
                     <Redirect to={"/home"} push />
                   ) : null}
-                </div>
+                </animated.div>
               );
     }   
 
