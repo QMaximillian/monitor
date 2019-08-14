@@ -7,7 +7,7 @@ import UpcomingAudition from '../components/UpcomingAudition'
 
 function Home(props){
 
-  const { loading, error, data } = useQuery(GET_VIEWER_HOME);
+  const { loading, error, data } = useQuery(GET_VIEWER_HOME, { fetchPolicy: 'network-only'});
   
 
                 if (loading) return null
