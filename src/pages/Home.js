@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery } from "@apollo/react-hooks";
 import gql from 'graphql-tag'
 import { getUserId } from '../lib/helpers';
@@ -6,40 +6,47 @@ import HomeSearch from '../components/HomeSearch'
 import UpcomingAudition from '../components/UpcomingAudition'
 
 function Home(props){
-  const id = getUserId()
-  const { loading, error, data } = useQuery(GET_VIEWER_HOME, { variables: { id } });
+
+  const { loading, error, data } = useQuery(GET_VIEWER_HOME);
   
-                if (loading) return 'Loading...'
+
+                if (loading) return null
                 if (error) return `Error ${error}`
-                return (
-                  <div className="flex w-screen h-screen">
-                    <div className="w-1/6">
-                      <div id="filters">
-                        <div>ASC</div>
-                        <div>DESC</div>
+                if (data && data.viewer) {
+                  return (
+                    <div className="flex w-screen h-screen">
+                      <div className="w-1/6">
+                        <div id="filters">
+                          <div>ASC</div>
+                          <div>DESC</div>
+                        </div>
+                      </div>
+                      <div className="w-3/6 overflow-auto-y">
+                        <HomeSearch
+                          monitor_auditions={data.viewer.monitor_auditions.slice(
+                            1
+                          )}
+                        />
+                      </div> 
+                      <div id="right-side" className="w-2/6">
+                        <UpcomingAudition
+                          audition={
+                            data.viewer.monitor_auditions[0]
+                          }
+                        />
                       </div>
                     </div>
-                    <div className="w-3/6 overflow-auto-y">
-                      <HomeSearch
-                        monitor_auditions={data.user.monitor_auditions.slice(
-                          1
-                        )}
-                      />
-                    </div>
-                    <div id="right-side" className="w-2/6">
-                      <UpcomingAudition
-                        audition={
-                          data.user.monitor_auditions[0]
-                        }
-                      />
-                    </div>
-                  </div>
-                );
-    }
+                  );
+                } else {
+                  return (<div>{console.log(data)}</div>)
+                }
+                  
+                
+}
 
     const GET_VIEWER_HOME = gql`
-      query user($id: ID!) {
-        user(id: $id) {
+      query viewer {
+        viewer {
           id
           first_name
           last_name

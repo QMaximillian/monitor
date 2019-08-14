@@ -15,7 +15,7 @@ import { getUserId } from '../lib/helpers';
 
 
 function MonitorView(props){
-  const id = getUserId()
+
   const [message, setMessage] = useState({value: '', isValid: false})
   // const { loading, data, error } = useQuery(GET_VIEWER_HOME, { variables: { id, audition_id: props.match.params.id} });
 
@@ -56,7 +56,30 @@ function MonitorView(props){
 }
 
 
-
+const GET_VIEWER_MONITOR_VIEW = gql`
+  query getMonitorView($id: ID!){
+    getMonitorView(id: $id) {
+      user(id: $id) {
+          id
+          first_name
+          last_name
+          email
+          phone_number
+          gender
+          equity
+          actors {
+            id
+            first_name
+            last_name
+            email
+            phone_number
+            gender
+            equity
+          }
+        }
+    }
+  }
+`
 
 // const GET_AUDITION = gql`
 // query Audition($id: ID!){
