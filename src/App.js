@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Login from './components/Login'
+import Login from './pages/Login'
 import Layout from './components/Layout'
-import Home from './components/Home'
-import MonitorView from './components/MonitorView'
+import Home from './pages/Home'
+import MonitorView from './pages/MonitorView'
 import './index.css';
 import jwt from "jsonwebtoken";
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'

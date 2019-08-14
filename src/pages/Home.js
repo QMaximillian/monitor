@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import { useQuery } from "@apollo/react-hooks";
 import gql from 'graphql-tag'
 import { getUserId } from '../lib/helpers';
-import HomeSearch from './HomeSearch'
-import UpcomingAudition from './UpcomingAudition'
+import HomeSearch from '../components/HomeSearch'
+import UpcomingAudition from '../components/UpcomingAudition'
 
-function Home(){
+function Home(props){
   const id = getUserId()
-  const { loading, data } = useQuery(GET_VIEWER_HOME, { variables: { id } });
+  const { loading, error, data } = useQuery(GET_VIEWER_HOME, { variables: { id } });
   
-
                 if (loading) return 'Loading...'
+                if (error) return `Error ${error}`
                 return (
                   <div className="flex w-screen h-screen">
                     <div className="w-1/6">

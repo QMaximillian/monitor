@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import AppointmentScrollTab from './AppointmentScrollTab'
+import gql from 'graphql-tag'
+
+
 class AppointmentScroll extends Component {
 
     
@@ -13,5 +16,30 @@ class AppointmentScroll extends Component {
         );
     }
 }
+
+const GET_VIEWER_MONITOR_VIEW = gql`
+  query getMonitorView($id: ID!){
+    getMonitorView(id: $id) {
+      user(id: $id) {
+          id
+          first_name
+          last_name
+          email
+          phone_number
+          gender
+          equity
+          actors {
+            id
+            first_name
+            last_name
+            email
+            phone_number
+            gender
+            equity
+          }
+        }
+    }
+  }
+`
 
 export default AppointmentScroll
