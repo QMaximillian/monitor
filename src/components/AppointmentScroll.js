@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
 import AppointmentScrollTab from './AppointmentScrollTab'
-import gql from 'graphql-tag'
 
 
-class AppointmentScroll extends Component {
 
-    
-    render(){
+function AppointmentScroll(props){
+
         return (
             <div className="flex flex-col border border-red-500 w-1/3 overflow-y-scroll relative h-screen">
               <div className="h-auto">
-                {new Array(20).fill(AppointmentScrollTab).map((AppointmentScrollTab, i) => <AppointmentScrollTab key={i}/>)}
+                {props.appointments.map(appointment => {
+                  return <AppointmentScrollTab appointment={appointment} interval={props.interval}/>
+                })}
               </div>
             </div>
         );
-    }
 }
 
 export default AppointmentScroll

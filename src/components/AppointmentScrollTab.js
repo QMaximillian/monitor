@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from 'prop-types'
 import { addMinutes, format } from 'date-fns'
 
-class AppointmentScrollTab extends Component {
-  render() {
+function AppointmentScrollTab(props){
+    console.log(props.appointment)
     return (
       <>
         <div className="w-full h-48 justify-between border-black bg-gray-500 border flex flex-col p-2">
@@ -13,26 +13,26 @@ class AppointmentScrollTab extends Component {
                 <div className="bg-green-500 border border-black shadow rounded-full h-4 w-4 flex justify-center self-center" />
                 <div className="ml-2">
                   {`${format(
-                    this.props.appointmentTime,
+                    props.appointment.time,
                     "h:mm a"
                   )} - ${format(
                     addMinutes(
-                      this.props.appointmentTime,
-                      this.props.auditionInterval
+                      props.appointment.time,
+                      props.interval
                     ),
                     "h:mm a"
                   )}`}
                 </div>
               </div>
               <div className="">
-                {this.props.user.equity ? "EQUITY" : ""}
+                {props.appointment.user.equity ? "EQUITY" : ""}
               </div>
             </div>
             <div className="flex text-2xl">
-              {`${this.props.user.first_name} ${this.props.user.last_name}`}
+              {`${props.appointment.user.first_name} ${props.appointment.user.last_name}`}
             </div>
             <div className="flex">
-              {`${this.props.user.phone} · ${this.props.user.email}`}
+              {`${props.appointment.user.phone_number} · ${props.appointment.user.email}`}
             </div>
           </div>
           <div>
@@ -52,13 +52,12 @@ class AppointmentScrollTab extends Component {
         </div>
       </>
     );
-  }
 }
 
 export default AppointmentScrollTab;
 
 AppointmentScrollTab.propTypes = {
-  user: PropTypes.shape({
+  appointment: PropTypes.shape({
     first_name: PropTypes.string.isRequired,
     last_name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
@@ -74,7 +73,7 @@ AppointmentScrollTab.propTypes = {
 };
 
 AppointmentScrollTab.defaultProps = {
-  user: {
+  appointment: {
     first_name: 'Quinn',
     last_name: 'Lashinsky',
     email: 'quinnlashinsky@gmail.com',
