@@ -9,7 +9,7 @@ function Home(props){
   const { loading, error, data } = useQuery(GET_VIEWER_HOME, { fetchPolicy: 'network-only'});
   
 
-                if (loading) return null
+                if (loading) return 'Loading...'
                 if (error) return `Error ${error}`
                 if (data && data.viewer) {
                   return (
@@ -37,14 +37,14 @@ function Home(props){
                     </div>
                   );
                 } else {
-                  return (<div>{console.log(data)}</div>)
+                  return <div>{console.log(data)}</div>
                 }
                   
                 
 }
 
     const GET_VIEWER_HOME = gql`
-      query viewer {
+      query {
         viewer {
           id
           first_name
