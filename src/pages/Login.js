@@ -32,8 +32,8 @@ function Login(props){
                 <animated.div style={fade} className="justify-center flex border-black border items-center h-screen">
                   <div className="bg-gray-500 mx-auto py-8 px-32 shadow-2xl rounded-lg">
                     <div className="flex flex-col flex-1 items-center">
-                      <div>Monitor</div>
-                      <div>Sign In to Your Audition</div>
+                      <div className="heebo text-2xl font-semibold">Monitor</div>
+                      <div>Sign In to Monitor</div>
                       <label
                         className="text-black text-sm font-bold mb-2"
                         htmlFor="email"

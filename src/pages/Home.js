@@ -10,8 +10,9 @@ function Home(props){
   
 
                 if (loading) return 'Loading...'
-                if (error) return `Error ${error}`
+                if(error) return error
                 if (data && data.viewer) {
+                  console.log(data)
                   return (
                     <div className="flex w-screen h-screen">
                       <div className="w-1/6">
@@ -36,8 +37,6 @@ function Home(props){
                       </div>
                     </div>
                   );
-                } else {
-                  return <div>{console.log(data)}</div>
                 }
                   
                 
@@ -63,6 +62,7 @@ function Home(props){
             city
             state
             zip_code
+            date
           }
         }
       }
