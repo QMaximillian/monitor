@@ -25,6 +25,24 @@ function Login(props){
     opacity: 1
   })
 
+  async function handleLogin(e){
+      e.preventDefault();
+      const result = await login();
+      try {
+        if (
+          result &&
+          result.data &&
+          result.data.login &&
+          result.data.login.token
+        ) {
+          localStorage.setItem("token", result.data.login.token);
+          setRedirect(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
 
       
 
@@ -77,31 +95,7 @@ function Login(props){
                         }
                       />
                       <button
-                        onClick={async e => {
-                          e.preventDefault();
-                          const result = await login()
-                          try {
-                              if (
-                                result &&
-                                result.data &&
-                                result.data
-                                  .login &&
-                                result.data.login
-                                  .token
-                              ) {
-                                localStorage.setItem(
-                                  "token",
-                                  result.data
-                                    .login.token
-                                );
-                                setRedirect(true);
-                              } 
-                          } catch(error) {
-                            console.log(error)
-                          }
-
-                              
-                          }}
+                        onClick={handleLogin}
                       >
                         Submit
                       </button>

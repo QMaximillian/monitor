@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from "@apollo/react-hooks";
 import gql from 'graphql-tag'
 import HomeSearch from '../components/HomeSearch'
@@ -8,6 +8,12 @@ function Home(props){
 
   const { loading, error, data } = useQuery(GET_VIEWER_HOME, { fetchPolicy: 'network-only'});
   
+  function handleOrder(){
+    return order.date === "ASC"
+      ? setOrder({ date: "DESC" })
+      : setOrder({ date: "ASC" });
+  }
+    const [order, setOrder] = useState({date: 'ASC'})
 
                 if (loading) return 'Loading...'
                 if(error) return error
@@ -15,19 +21,25 @@ function Home(props){
                   console.log(data)
                   return (
                     <div className="flex w-screen h-screen">
-                      <div className="w-1/6">
-                        <div id="filters">
-                          <div>ASC</div>
-                          <div>DESC</div>
-                        </div>
+                      <div className="w-1/6 flex flex-col">
+                          <div
+                            onClick={() => handleOrder()}
+                            className="flex justify-center"
+                          >
+                            <div className="flex flex-col">
+                              <div>DATE</div>
+                              <div>{order.date}</div>
+                            </div>
+                          </div>
                       </div>
                       <div className="w-3/6 overflow-auto-y">
                         <HomeSearch
+                          order={order}
                           monitor_auditions={data.viewer.monitor_auditions.slice(
                             1
                           )}
                         />
-                      </div> 
+                      </div>
                       <div id="right-side" className="w-2/6">
                         <UpcomingAudition
                           audition={
