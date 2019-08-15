@@ -1,6 +1,9 @@
 module.exports = {
   theme: {
     extend: {
+      fontFamily: {
+        primary: ['Heebo'],
+      },
       colors: {
         "m-purple": {
           100: "#FCF7FC",

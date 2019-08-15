@@ -16,6 +16,7 @@ import { useQuery } from '@apollo/react-hooks';
 function MonitorView(props){
 
   const [message, setMessage] = useState({value: '', isValid: false})
+  const [selectedActor, setSelectedActor] = useState('')
   const { loading, data, error } = useQuery(GET_MONITOR_VIEWER_AND_AUDITION, {
     variables: { audition_id: props.match.params.id }
   });
@@ -26,7 +27,7 @@ function MonitorView(props){
   if (data && data.viewer && data.audition) {
     return (
       <div className="flex">
-        <AppointmentScroll appointments={data.audition.appointments} interval={data.audition.interval}/>
+        <AppointmentScroll setSelectedActor={setSelectedActor} appointments={data.audition.appointments} interval={data.audition.interval}/>
         <MonitorControlCenter>
           <div className="flex flex-col justify-between w-full">
             <MessageBlast>

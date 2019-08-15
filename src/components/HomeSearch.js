@@ -11,7 +11,7 @@ export default function HomeSearch(props){
   
     return (
       <div id="left-side" className="w-full h-full">
-        <div className="p-2 h-screen overflow-y-scroll">
+        <div className="px-2 pb-2 h-screen overflow-y-scroll">
           <TextBox
             type="text"
             name="search"
@@ -24,7 +24,7 @@ export default function HomeSearch(props){
             placeholder="Search past auditions you've monitored"
           />
           <div className="px-2">
-            <div className="flex flex-wrap -mx-2 border-black border">
+            <div className="flex flex-wrap -mx-2">
               {props.monitor_auditions
                   .sort((a,b) => {
                       return props.order.date === "ASC"

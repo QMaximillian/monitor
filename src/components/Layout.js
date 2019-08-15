@@ -4,10 +4,10 @@ function Layout(props) {
 
 
     return (
-        <div className="bg-m-white-500 h-screen w-full">
-            {props.children}
-        </div>
-    )
+      <div className="font-primary bg-m-white-200 h-screen w-screen border border-black px-4 pt-4">
+        {props.children}
+      </div>
+    );
 }
 
 export default Layout

@@ -47,25 +47,60 @@ function Login(props){
       
 
               return (
-                <animated.div style={fade} className="justify-center flex border-black border items-center h-screen">
-                  <div className="bg-gray-500 mx-auto py-8 px-32 shadow-2xl rounded-lg">
-                    <div className="flex flex-col flex-1 items-center">
-                      <div className="heebo text-2xl font-semibold">Monitor</div>
-                      <div>Sign In to Monitor</div>
-                      <label
-                        className="text-black text-sm font-bold mb-2"
-                        htmlFor="email"
-                      >
-                        Email
-                      </label>
-                      <div className="mx-auto">
+                  <animated.div
+                    style={fade}
+                    className="justify-center flex border-black border items-center h-screen"
+                  >
+                    <div className="bg-gray-500 mx-auto py-8 px-32 shadow-2xl rounded-lg">
+                      <div className="flex flex-col flex-1 items-center">
+                        <div className="heebo text-2xl font-semibold">
+                          Monitor
+                        </div>
+                        <div>Sign In to Monitor</div>
+                        <label
+                          className="text-black text-sm font-bold mb-2"
+                          htmlFor="email"
+                        >
+                          Email
+                        </label>
+                        <div className="mx-auto">
+                          <TextBox
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            value={
+                              email.email && email.email.value
+                            }
+                            onChange={({
+                              name,
+                              isValid,
+                              value
+                            }) =>
+                              setEmail({
+                                [name]: {
+                                  value,
+                                  isValid
+                                }
+                              })
+                            }
+                          />
+                        </div>
+                        <label
+                          className="text-black text-sm font-bold mb-2 pt-5"
+                          htmlFor="password"
+                        >
+                          Password
+                        </label>
                         <TextBox
-                          name="email"
-                          type="email"
-                          placeholder="Email"
-                          value={email.email && email.email.value}
+                          name="password"
+                          type="password"
+                          placeholder="Password"
+                          value={
+                            password.password &&
+                            password.password.value
+                          }
                           onChange={({ name, isValid, value }) =>
-                            setEmail({
+                            setPassword({
                               [name]: {
                                 value,
                                 isValid
@@ -73,39 +108,16 @@ function Login(props){
                             })
                           }
                         />
+                        <button onClick={handleLogin}>
+                          Submit
+                        </button>
+                        {loading ? "Loading..." : null}
                       </div>
-                      <label
-                        className="text-black text-sm font-bold mb-2 pt-5"
-                        htmlFor="password"
-                      >
-                        Password
-                      </label>
-                      <TextBox
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        value={password.password && password.password.value}
-                        onChange={({ name, isValid, value }) =>
-                          setPassword({
-                            [name]: {
-                              value,
-                              isValid
-                            }
-                          })
-                        }
-                      />
-                      <button
-                        onClick={handleLogin}
-                      >
-                        Submit
-                      </button>
-                      {loading ? 'Loading...' : null}
                     </div>
-                  </div>
-                  {redirect ? (
-                    <Redirect to={"/home"} push />
-                  ) : null}
-                </animated.div>
+                    {redirect ? (
+                      <Redirect to={"/home"} push />
+                    ) : null}
+                  </animated.div>
               );
     }   
 

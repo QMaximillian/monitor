@@ -3,12 +3,13 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from 'graphql-tag'
 import HomeSearch from '../components/HomeSearch'
 import UpcomingAudition from '../components/UpcomingAudition'
+import Filters from '../components/Filters'
 
 function Home(props){
 
   const { loading, error, data } = useQuery(GET_VIEWER_HOME, { fetchPolicy: 'network-only'});
   
-  function handleOrder(){
+  function handleDateOrder(){
     return order.date === "ASC"
       ? setOrder({ date: "DESC" })
       : setOrder({ date: "ASC" });
@@ -18,21 +19,13 @@ function Home(props){
                 if (loading) return 'Loading...'
                 if(error) return error
                 if (data && data.viewer) {
-                  console.log(data)
+
                   return (
-                    <div className="flex w-screen h-screen">
-                      <div className="w-1/6 flex flex-col">
-                          <div
-                            onClick={() => handleOrder()}
-                            className="flex justify-center"
-                          >
-                            <div className="flex flex-col">
-                              <div>DATE</div>
-                              <div>{order.date}</div>
-                            </div>
-                          </div>
+                    <div className="flex w-full h-full">
+                      <div className="w-1/6 flex flex-col h-full py-4">
+                        <Filters handleDateOrder={handleDateOrder} order={order}/>
                       </div>
-                      <div className="w-3/6 overflow-auto-y">
+                      <div className="w-3/6 overflow-auto-y h-full">
                         <HomeSearch
                           order={order}
                           monitor_auditions={data.viewer.monitor_auditions.slice(
@@ -40,7 +33,7 @@ function Home(props){
                           )}
                         />
                       </div>
-                      <div id="right-side" className="w-2/6">
+                      <div id="right-side" className="w-2/6 h-full">
                         <UpcomingAudition
                           audition={
                             data.viewer.monitor_auditions[0]
