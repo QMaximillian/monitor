@@ -12,7 +12,7 @@ function Login(props){
   const [email, setEmail] = useState({value: '', isValid: false})
   const [password, setPassword] = useState({value: '', isValid: false})
   const [redirect, setRedirect] = useState(false)
-  const [login, { loading }] = useMutation(LOGIN, {
+  const [login] = useMutation(LOGIN, {
     variables: {
       email: email.email && email.email.value,
       password: password.password && password.password.value
@@ -25,9 +25,10 @@ function Login(props){
     opacity: 1
   })
 
-  async function handleLogin(e){
+  async function handleLogin(){
       e.preventDefault();
       const result = await login();
+
       try {
         if (
           result &&
@@ -36,7 +37,9 @@ function Login(props){
           result.data.login.token
         ) {
           localStorage.setItem("token", result.data.login.token);
-          setRedirect(true);
+
+setRedirect(true);
+
         }
       } catch (error) {
         console.log(error);
@@ -47,60 +50,30 @@ function Login(props){
       
 
               return (
-                  <animated.div
-                    style={fade}
-                    className="justify-center flex border-black border items-center h-screen"
-                  >
-                    <div className="bg-gray-500 mx-auto py-8 px-32 shadow-2xl rounded-lg">
-                      <div className="flex flex-col flex-1 items-center">
-                        <div className="heebo text-2xl font-semibold">
-                          Monitor
-                        </div>
-                        <div>Sign In to Monitor</div>
-                        <label
-                          className="text-black text-sm font-bold mb-2"
-                          htmlFor="email"
-                        >
-                          Email
-                        </label>
-                        <div className="mx-auto">
-                          <TextBox
-                            name="email"
-                            type="email"
-                            placeholder="Email"
-                            value={
-                              email.email && email.email.value
-                            }
-                            onChange={({
-                              name,
-                              isValid,
-                              value
-                            }) =>
-                              setEmail({
-                                [name]: {
-                                  value,
-                                  isValid
-                                }
-                              })
-                            }
-                          />
-                        </div>
-                        <label
-                          className="text-black text-sm font-bold mb-2 pt-5"
-                          htmlFor="password"
-                        >
-                          Password
-                        </label>
+                <animated.div
+                  style={fade}
+                  className="justify-center flex items-center h-screen"
+                >
+                  <div className="bg-gray-500 mx-auto py-8 px-32 shadow-2xl rounded-lg border border-m-purple-500">
+                    <div className="flex flex-col flex-1 items-center">
+                      <div className="heebo text-2xl font-semibold">
+                        Monitor
+                      </div>
+                      <div>Sign In to Monitor</div>
+                      <label
+                        className="text-black text-sm font-bold mb-2"
+                        htmlFor="email"
+                      >
+                        Email
+                      </label>
+                      <div className="mx-auto">
                         <TextBox
-                          name="password"
-                          type="password"
-                          placeholder="Password"
-                          value={
-                            password.password &&
-                            password.password.value
-                          }
+                          name="email"
+                          type="email"
+                          placeholder="Email"
+                          value={email.email && email.email.value}
                           onChange={({ name, isValid, value }) =>
-                            setPassword({
+                            setEmail({
                               [name]: {
                                 value,
                                 isValid
@@ -108,16 +81,37 @@ function Login(props){
                             })
                           }
                         />
-                        <button onClick={handleLogin}>
-                          Submit
-                        </button>
-                        {loading ? "Loading..." : null}
                       </div>
+                      <label
+                        className="text-black text-sm font-bold mb-2 pt-5"
+                        htmlFor="password"
+                      >
+                        Password
+                      </label>
+                      <TextBox
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        value={
+                          password.password &&
+                          password.password.value
+                        }
+                        onChange={({ name, isValid, value }) =>
+                          setPassword({
+                            [name]: {
+                              value,
+                              isValid
+                            }
+                          })
+                        }
+                      />
+                      <button onClick={handleLogin}>
+                        Submit
+                      </button>
+                      {redirect ? <Redirect push to={"/home"} /> : null}
                     </div>
-                    {redirect ? (
-                      <Redirect to={"/home"} push />
-                    ) : null}
-                  </animated.div>
+                  </div>
+                </animated.div>
               );
     }   
 

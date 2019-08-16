@@ -8,7 +8,7 @@ import Filters from '../components/Filters'
 function Home(props){
 
   const { loading, error, data } = useQuery(GET_VIEWER_HOME, { fetchPolicy: 'network-only'});
-  
+
   function handleDateOrder(){
     return order.date === "ASC"
       ? setOrder({ date: "DESC" })
