@@ -41,7 +41,6 @@ export default function HomeSearch(props){
                   }
                 )
                 .map(audition => {
-                  console.log(audition);
                   return (
                     <div
                       className="w-1/2 p-4 flex justify-center"

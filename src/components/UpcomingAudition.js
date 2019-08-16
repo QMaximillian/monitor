@@ -25,7 +25,7 @@ export default function UpcomingAudition(props){
                 onMouseLeave={() => setArrowHover(false)}
                 to={`monitor-audition/${props.audition.id}`}
               >
-                <i class="absolute bottom-0 right-0 text-3xl text-m-purple-500 rounded fas fa-arrow-right" />
+                <i className="absolute bottom-0 right-0 text-3xl text-m-purple-500 rounded fas fa-arrow-right" />
               </Link>
             </animated.div>
         </div>

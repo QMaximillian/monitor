@@ -6,7 +6,7 @@ import MonitorView from './pages/MonitorView'
 import './index.css';
 import jwt from "jsonwebtoken";
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
-
+import "react-dates/initialize";
 
 
 function PrivateRoute({ component: Component, ...rest }) {
