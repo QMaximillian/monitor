@@ -25,8 +25,8 @@ function Login(props){
     opacity: 1
   })
 
-  async function handleLogin(){
-      e.preventDefault();
+  async function handleLogin(event){
+      event.preventDefault();
       const result = await login();
 
       try {

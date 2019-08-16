@@ -8,7 +8,7 @@ export default function UpcomingAudition(props){
   const scaleArrow = useSpring({transform: arrowHover ? 'scale(1.05, 1)' : 'scale(1, 1)'})
 
     return (
-      <div className="h-full flex flex-col">
+      <div className="flex flex-col">
         <div className="border border-m-purple-500 px-4 py-2 bg-white rounded relative h-48 flex flex-col justify-between">
             <div className="text-2xl">Upcoming Audition</div>
             <div className="">{props.audition.show_name}</div>

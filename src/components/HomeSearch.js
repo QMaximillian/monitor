@@ -26,19 +26,22 @@ export default function HomeSearch(props){
           <div className="px-2">
             <div className="flex flex-wrap -mx-2">
               {props.monitor_auditions
-                  .sort((a,b) => {
-                      return props.order.date === "ASC"
-                        ? new Date(a.date) -
-                            new Date(b.date)
-                        : new Date(b.date) -
-                            new Date(a.date);
-                  }
-                    )
+                .sort((a, b) => {
+                  return props.order.date === "ASC"
+                    ? new Date(a.date) - new Date(b.date)
+                    : new Date(b.date) - new Date(a.date);
+                })
                 .filter(
-                  audition =>
-                    audition.show_name.toLowerCase().match(search.search.value.toLowerCase())
+                  audition => {
+
+                    return audition.show_name
+                      .toLowerCase()
+                      .match(search.search.value.toLowerCase()) &&
+                    audition.state.match(props.abbreviation && props.abbreviation.value)
+                  }
                 )
                 .map(audition => {
+                  console.log(audition);
                   return (
                     <div
                       className="w-1/2 p-4 flex justify-center"
@@ -46,7 +49,7 @@ export default function HomeSearch(props){
                     >
                       <Link
                         to={`monitor-audition/${audition.id}`}
-                        className="relative bg-white rounded border border-purple-500 h-32 w-full"
+                        className="relative bg-white rounded border border-m-purple-500 h-32 w-full"
                       >
                         <div className="ml-2 absolute bottom-0 left-0 text-2xl">
                           <i className="fas fa-theater-masks" />
