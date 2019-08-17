@@ -9,9 +9,9 @@ export default function UpcomingAudition(props){
 
     return (
       <div className="flex flex-col">
-        <div className="border border-m-purple-500 px-4 py-2 bg-white rounded relative h-48 flex flex-col justify-between">
-            <div className="text-2xl">Upcoming Audition</div>
-            <div className="">{props.audition.show_name}</div>
+        <div className="border border-m-purple-500 bg-white rounded relative h-48 flex flex-col justify-between">
+          <div className="text-xl text-center px-2 py-1 mr-auto rounded border-t-0 border-l-0 border-m-purple-500 border" style={{textShadow: "1px 0px #DCABDF, 1px  1px #fff"}}>Upcoming Audition</div>
+            <div className="text-2xl" style={{textShadow: "1px 0px #D4AF37, 1px  1px #fff"}}>{props.audition.show_name}</div>
             <div className="">
               {`${format(props.audition.begin_time, "H:mm a")} - ${format(
                 props.audition.end_time,
