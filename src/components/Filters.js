@@ -1,24 +1,19 @@
 import React, { useState } from 'react'
-import { useSprings, animated } from 'react-spring'
+// import { useSprings, animated } from 'react-spring'
 import {stateAbbreviations} from '../lib/helpers'
 import Select from 'react-select'
 import {
   SingleDatePicker
 } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
-import moment from 'moment'
 
 export default function Filters(props){
 
-  // const [beginDate, setBeginDate] = useState(moment())
-  const [date, setDate] = useState({beginDate: moment(), endDate: moment()})
+
+  
   const [focused, setFocused] = useState({beginFocused: false, endFocused: false})
-  // const [endFocused, setEndFocused] = useState(false)
-console.log('DATE', date)
-  function handleReset(){
-    props.handleDateOrder('reset')
-    props.setAbbreviation({value: '', label: ''})
-  }
+
+  
 
        return (
          <div
@@ -33,7 +28,7 @@ console.log('DATE', date)
            </div>
            <div className="">
              <button
-               onClick={handleReset}
+               onClick={props.clearAllFilters}
                className="mt-4 px-2 py-1 bg-m-dark-300 border border-m-purple-500 shadow-md rounded"
              >
                Clear All
@@ -56,6 +51,7 @@ console.log('DATE', date)
                <div className="w-1/2 justify-center flex">
                  <Select
                    className="w-20"
+                   value={props.abbreviation}
                    options={stateAbbreviations}
                    onChange={action => props.setAbbreviation(action)}
                  />
@@ -63,36 +59,36 @@ console.log('DATE', date)
              </div>
              <div className="flex justify-around w-full items-center pt-6">
                <div className="w-1/2">BEGIN DATE</div>
-               {/* <div className="w-1/2">
+               <div className="w-1/2">
                  <SingleDatePicker
                    id={"eede4381-0fd5-4d38-b7f5-67630cf9657c"}
                    focused={focused.beginFocused}
-                   onFocusChange={({ focused }) =>
-                     setFocused({ beginFocused: focused })
+                   onFocusChange={({ focused: action }) =>
+                     setFocused({ beginFocused: action })
                    }
                    onDateChange={day =>
-                     setDate({ beginDate: day, endDate: date.endDate })
+                     props.setDate({ beginDate: day, endDate: props.date.endDate })
                    }
-                   date={date.beginDate}
+                   date={props.date.beginDate}
                  />
-               </div> */}
+               </div>
              </div>
 
              <div className="pt-6 flex justify-around w-full items-center pt-6">
-               {/* <div className="w-1/2">END DATE</div>
+               <div className="w-1/2">END DATE</div>
                <div className="w-1/2">
                  <SingleDatePicker
                    id={"b7d93f25-1a85-4cc3-86e2-535b4d1b9e9e"}
                    focused={focused.endFocused}
-                   onFocusChange={({ focused }) =>
-                     setFocused({ endFocused: focused })
+                   onFocusChange={({ focused: action }) =>
+                     setFocused({ endFocused: action })
                    }
                    onDateChange={day =>
-                     setDate({ endDate: day, beginDate: date.beginDate })
+                     props.setDate({ endDate: day, beginDate: props.date.beginDate })
                    }
-                   date={date.endDate}
+                   date={props.date.endDate}
                  />
-               </div> */}
+               </div>
              </div>
            </div>
          </div>

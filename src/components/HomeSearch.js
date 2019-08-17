@@ -3,12 +3,14 @@ import TextBox from './TextBox'
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 
-
 export default function HomeSearch(props){
     const [search, setSearch] = useState({search: {
     value: '', isValid: false
   }})
+
   
+  
+
     return (
       <div id="left-side" className="w-full h-full">
         <div className="px-2 pb-2 h-screen overflow-y-scroll">
@@ -34,10 +36,14 @@ export default function HomeSearch(props){
                 .filter(
                   audition => {
 
-                    return audition.show_name
-                      .toLowerCase()
-                      .match(search.search.value.toLowerCase()) &&
-                    audition.state.match(props.abbreviation && props.abbreviation.value)
+                    return (
+                      audition.show_name
+                        .toLowerCase()
+                        .match(search.search.value.toLowerCase()) &&
+                      audition.state.match(props.abbreviation && props.abbreviation.value) 
+                      &&
+                      props.dateCheck(audition.date)
+                    )
                   }
                 )
                 .map(audition => {
