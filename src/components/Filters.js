@@ -21,7 +21,10 @@ export default function Filters(props){
   }
 
        return (
-         <div className="text-center flex flex-col h-full rounded border border-m-purple-500 w-full h-16 border-x-0">
+         <div
+           style={{ backgroundColor: "rgba(238, 223, 222, .15)" }}
+           className="text-center flex flex-col h-full rounded border border-m-purple-500 w-full h-16 border-x-0"
+         >
            <div className="text-xl border-m-purple-500 border border-r-0 border-t-0 border-l-0">
              Filters
            </div>
@@ -56,30 +59,37 @@ export default function Filters(props){
                />
              </div>
            </div>
-           <div>
-             <div>DATE RANGE</div>
-             <div className="">
-               <div>
+           <div className="flex justify-around w-full items-center pt-6">
+             <div className="pt-6">
+               <div className="w-full justify-center flex mx-2">
                  BEGIN DATE
                  <SingleDatePicker
                    id={"eede4381-0fd5-4d38-b7f5-67630cf9657c"}
                    focused={focused.beginFocused}
-                   onFocusChange={({ focused }) => setFocused({beginFocused: focused})}
-                   onDateChange={day => setDate({beginDate: day})}
+                   onFocusChange={({ focused }) =>
+                     setFocused({ beginFocused: focused })
+                   }
+                   onDateChange={day => setDate({ beginDate: day })}
                    date={date.beginDate}
                  />
                </div>
-               <div>
-                 END DATE
-                 <SingleDatePicker
-                   id={"b7d93f25-1a85-4cc3-86e2-535b4d1b9e9e"}
-                   focused={focused.endFocused}
-                   onFocusChange={({ focused }) => setFocused({endFocused: focused})}
-                   onDateChange={day => setDate({endDate: day})}
-                   date={date.endDate}
-                 />
-               </div>
              </div>
+           </div>
+           <div>
+             <div className="pt-6">
+               END DATE
+               <SingleDatePicker
+                 id={"b7d93f25-1a85-4cc3-86e2-535b4d1b9e9e"}
+                 focused={focused.endFocused}
+                 onFocusChange={({ focused }) =>
+                   setFocused({ endFocused: focused })
+                 }
+                 onDateChange={day => setDate({ endDate: day })}
+                 date={date.endDate}
+               />
+             </div>
+
+             <div />
            </div>
          </div>
        );
