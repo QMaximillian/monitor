@@ -26,7 +26,7 @@ export default function UpcomingAuditionInfo(props){
     function renderInstructions(){
         return instructions.map(instruction => {
             return (
-              <div>
+              <div className="mt-2">
                 {`• ${instruction}`}
               </div>
             );
@@ -54,7 +54,7 @@ export default function UpcomingAuditionInfo(props){
                    : () => setSwap("INSTRUCTIONS")
                }
              >
-               <i class="fas fa-angle-double-right" />
+               <i className="fas fa-angle-double-right" />
              </button>
              <div className="mt-6 flex flex-col justify-between">
                 {renderSwap()}

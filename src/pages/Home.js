@@ -69,10 +69,10 @@ function Home(props){
                 if (data && data.viewer) {
                   return (
                     <div className="flex w-full h-full">
-                      <div className="w-3/12 flex flex-col h-full">
+                      <div className="w-1/4 flex flex-col h-full">
                         <Filters abbreviation={abbreviation} clearAllFilters={clearAllFilters} date={date} setDate={setDate} handleDateOrder={handleDateOrder} order={order} setAbbreviation={setAbbreviation}/>
                       </div>
-                      <div className="w-6/12 overflow-auto-y h-full">
+                      <div className="w-1/2 overflow-auto-y h-full">
                         <HomeSearch
                           order={order}
                           abbreviation={abbreviation}
@@ -81,7 +81,7 @@ function Home(props){
                           dateCheck={dateCheck}
                         />
                       </div>
-                      <div id="" className="w-3/12 h-full flex flex-col justify-between">
+                      <div id="right" className="w-1/4 h-full flex flex-col justify-between">
                         <UpcomingAudition
                           audition={
                             upcomingAudition(data.viewer.monitor_auditions)

@@ -22,7 +22,7 @@ export default function Filters(props){
          >
            <div
              style={{ textShadow: "1px 0px #DCABDF, 1px  1px #fff" }}
-             className="text-xl border-m-purple-500 border border-r-0 border-t-0 border-l-0"
+             className="text-lg border-m-purple-500 border border-r-0 border-t-0 border-l-0"
            >
              Filters
            </div>

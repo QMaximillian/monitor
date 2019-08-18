@@ -16,7 +16,7 @@ export default function Task(props){
              props.todo.completed = !props.todo.completed;
              props.setTodos(props.spreadTodos);
            }}
-           className="flex items-center"
+           className="flex items-center mt-2"
          >
            <input type="checkbox" value={props.todo.completed} />
            <input
