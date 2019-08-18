@@ -12,7 +12,11 @@ export default function HomeSearch(props){
   
 
     return (
-      <div id="left-side" className="w-full h-full">
+      <div
+        id="middle"
+        className="w-full h-full"
+        style={{ backgroundColor: "rgba(238, 223, 222, .15)" }}
+      >
         <div className="px-2 pb-2 h-screen overflow-y-scroll">
           <TextBox
             type="text"
@@ -33,19 +37,17 @@ export default function HomeSearch(props){
                     ? new Date(a.date) - new Date(b.date)
                     : new Date(b.date) - new Date(a.date);
                 })
-                .filter(
-                  audition => {
-
-                    return (
-                      audition.show_name
-                        .toLowerCase()
-                        .match(search.search.value.toLowerCase()) &&
-                      audition.state.match(props.abbreviation && props.abbreviation.value) 
-                      &&
-                      props.dateCheck(audition.date)
-                    )
-                  }
-                )
+                .filter(audition => {
+                  return (
+                    audition.show_name
+                      .toLowerCase()
+                      .match(search.search.value.toLowerCase()) &&
+                    audition.state.match(
+                      props.abbreviation && props.abbreviation.value
+                    ) &&
+                    props.dateCheck(audition.date)
+                  );
+                })
                 .map(audition => {
                   return (
                     <div
@@ -54,7 +56,7 @@ export default function HomeSearch(props){
                     >
                       <Link
                         to={`monitor-audition/${audition.id}`}
-                        className="relative bg-white rounded border border-m-purple-500 h-32 w-full"
+                        className="relative bg-white rounded border border-m-purple-500 h-32 w-full shadow-lg"
                       >
                         <div className="ml-2 absolute bottom-0 left-0 text-2xl">
                           <i className="fas fa-theater-masks" />
@@ -64,7 +66,10 @@ export default function HomeSearch(props){
                             {audition.show_name}
                           </div>
                           <div className="text-base text-right">
-                            {format(audition.date, "dddd, MMMM Qo YYYY")}
+                            {format(
+                              audition.date,
+                              "dddd, MMMM Qo YYYY"
+                            )}
                           </div>
                         </div>
                       </Link>

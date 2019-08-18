@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from 'graphql-tag'
 import HomeSearch from '../components/HomeSearch'
 import UpcomingAudition from '../components/UpcomingAudition'
+import UpcomingAuditionInfo from '../components/UpcomingAuditionInfo'
 import Filters from '../components/Filters'
 import moment from "moment";
 import { isWithinRange } from "date-fns";
@@ -10,12 +11,8 @@ import { isWithinRange } from "date-fns";
 function Home(props){
 
   const { loading, error, data } = useQuery(GET_VIEWER_HOME, { fetchPolicy: 'network-only'});
-  const [todos, setTodos] = useState([
-    { task: "go to place", completed: false },
-    { task: "do thing", completed: false },
-    { task: "eat food", completed: false }
-  ]);
-  const initialDateState = {beginDate: moment.unix(0), endDate: moment()}
+  
+  const initialDateState = {beginDate: moment.unix(0), endDate: moment.unix(1703980800)}
   const [date, setDate] = useState(initialDateState)
   const [order, setOrder] = useState({ date: "ASC" });
   const [abbreviation, setAbbreviation] = useState();
@@ -30,24 +27,7 @@ function Home(props){
 
 
 
-  function returnTodos(){
-    const spreadTodos = [...todos]
-
-    return spreadTodos
-      .map(todo => {
-        return(
-            <div 
-              onClick={() => {
-                todo.completed = !todo.completed
-                setTodos(spreadTodos)
-              }} 
-              className="flex items-center">
-                <input type="checkbox" value={todo.completed} />
-                <div>{todo.task}</div>
-            </div>
-        )
-      })
-  }
+  
 
   function handleDateOrder(arg){
     if (arg === 'reset') {
@@ -87,9 +67,6 @@ function Home(props){
                 if (loading) return 'Loading...'
                 if(error) return error
                 if (data && data.viewer) {
-
-                  
-
                   return (
                     <div className="flex w-full h-full">
                       <div className="w-3/12 flex flex-col h-full">
@@ -110,14 +87,8 @@ function Home(props){
                             upcomingAudition(data.viewer.monitor_auditions)
                           }
                         />
-                        <div className="my-2 pl-2 pt-2 h-full w-full border-b-0 border border-m-purple-500 rounded rounded-b-none">
-                          <div className="text-center">
-                          Instructions
-                          </div>
-                          <div className="flex flex-col">
-                            
-                          {returnTodos()}
-                          </div>
+                        <div className="mt-2 px-4 pt-4 h-full w-full border-b-0 border border-m-purple-500 rounded rounded-b-none">
+                          <UpcomingAuditionInfo />
                         </div>
                       </div>
                     </div>

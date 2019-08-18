@@ -16,7 +16,7 @@ export default function Filters(props){
   
 
        return (
-         <div
+         <div id="left-side"
            style={{ backgroundColor: "rgba(238, 223, 222, .15)" }}
            className="text-center flex flex-col h-full rounded border border-m-purple-500 w-full h-16 border-x-0"
          >
