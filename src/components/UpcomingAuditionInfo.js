@@ -10,7 +10,7 @@ export default function UpcomingAuditionInfo(props){
       { task: "eat food", completed: false }
     ]);
 
-    const instructions = ['Please arrive at 12am', 'Do not let actors use the bathroom on the first floor', 'Practice rooms are available on the 4th floor']
+    // const instructions = ['Please arrive at 12am', 'Do not let actors use the bathroom on the first floor', 'Practice rooms are available on the 4th floor']
     const [swap, setSwap] = useState('INSTRUCTIONS')
 
     function renderTodos() {
@@ -22,12 +22,13 @@ export default function UpcomingAuditionInfo(props){
         );
       });
     }
+    console.log(props.instructions)
 
     function renderInstructions(){
-        return instructions.map(instruction => {
+        return props.instructions.map(instruction => {
             return (
               <div className="mt-2">
-                {`• ${instruction}`}
+                {`• ${instruction.instruction}`}
               </div>
             );
         })
