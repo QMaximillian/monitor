@@ -9,7 +9,7 @@ function AppointmentScroll(props){
             <div className="flex flex-col border border-red-500 w-1/3 overflow-y-scroll relative h-screen">
               <div className="h-auto">
                 {props.appointments.map(appointment => {
-                  return <AppointmentScrollTab appointment={appointment} interval={props.interval}/>
+                  return <AppointmentScrollTab setSelectedActor={props.setSelectedActor} appointment={appointment} interval={props.interval}/>
                 })}
               </div>
             </div>

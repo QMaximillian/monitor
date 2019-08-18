@@ -1,13 +1,12 @@
 import React from "react";
 
-class ActorProfileContainer extends React.Component {
-  render() {
+function ActorProfileContainer(props){
+
     return (
       <div className="flex w-1/2 justify-center">
-        ActorProfileContainer
+        {console.log(props.selectedActor)}
       </div>
     );
-  }
 }
 
 /**

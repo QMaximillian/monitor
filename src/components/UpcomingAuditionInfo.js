@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Task from '../components/Task'
-import Instruction from '../components/Instruction'
+
 
 export default function UpcomingAuditionInfo(props){
 

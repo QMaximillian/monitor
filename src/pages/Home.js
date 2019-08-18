@@ -67,6 +67,7 @@ function Home(props){
                 if (loading) return 'Loading...'
                 if(error) return error
                 if (data && data.viewer) {
+                  
                   return (
                     <div className="flex w-full h-full">
                       <div className="w-1/4 flex flex-col h-full">
@@ -119,6 +120,14 @@ function Home(props){
             state
             zip_code
             date
+          }
+          upcoming_audition {
+            id
+            show_name
+            instructions {
+              id
+              instruction
+            }
           }
         }
       }

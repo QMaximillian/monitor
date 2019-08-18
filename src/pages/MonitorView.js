@@ -50,7 +50,7 @@ function MonitorView(props){
               </div>
             </MessageBlast>
             <div className="h-full flex flex-row justify-center w-full">
-              <ActorProfileContainer />
+              <ActorProfileContainer selectedActor={selectedActor}/>
               <ChatContainer />
             </div>
           </div>
