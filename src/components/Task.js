@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import { useMutation } from '@apollo/react-hooks'
-import { SAVE_TODO } from '../lib/mutations'
+import { UPDATE_TODO } from '../lib/mutations'
 export default function Task(props){
 
     const [inputValue, setInputValue] = useState(props.todo.task);
-    const [saveTodo, { loading, error }] = useMutation(SAVE_TODO)
+    const [updateTodo, { loading, error, data }] = useMutation(UPDATE_TODO)
 
     function handleInput(event){
         setInputValue(event.target.value);
@@ -14,8 +14,18 @@ export default function Task(props){
     
 
     useEffect(() => {
-      setInterval(() =>{saveTodo({variables: {...props.todo}})}, 30000)
+      let interval;
+        if (props.todo.id) {
+          interval = setInterval(() => {
+            updateTodo({ variables: { ...props.todo } });
+          }, 20000);
+        }
       // figure out how to stop the interval from firing if the todo is unchanged
+      return () => {
+        if (props.todo.id) {
+          clearInterval(interval);
+        }
+      }
     })
 
        return (
