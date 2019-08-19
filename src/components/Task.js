@@ -6,6 +6,7 @@ export default function Task(props){
 
     const [updateTodo, { data }] = useMutation(UPDATE_TODO)
     const [saveTodo] = useMutation(SAVE_TODO)
+    const [showButton, setShowButton] = useState(true)
 
     async function handleInput(event){
        
@@ -24,7 +25,7 @@ export default function Task(props){
         interval = setInterval(() => {
           updateTodo({ variables: { ...props.todo } });
         }, 20000);
-        console.log(props.todo)
+        // console.log(props.todo)
       }
       // console.log(props.todo);
         
@@ -53,10 +54,11 @@ export default function Task(props){
              value={props.todo.task}
              placeholder={"new todo"}
            />
-           {!props.todo.id ? <button onClick={async () => {
+           {!props.todo.id && showButton && <button onClick={async () => {
              saveTodo({variables: { ...props.todo }})
-
-           }}>Save</button> : null}
+              console.log(props.todo)
+              setShowButton(false)
+           }}>Save</button>}
          </div>
        );
 }

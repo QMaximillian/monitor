@@ -13,6 +13,7 @@ export default function UpcomingAuditionInfo(props){
       const spreadTodos = [...todos];
 
       const todoList = spreadTodos.map(todo => {
+        console.log(todo.task, todo.id)
         return (
             <Task
               key={todo.id}
@@ -27,7 +28,7 @@ export default function UpcomingAuditionInfo(props){
       return (
         <div>
           {todoList}
-          <button onClick={() => setTodos([...spreadTodos, {task: '', completed: false, audition_id: props.id }])} className="border border-m-purple-500 w-full mt-4 rounded">
+          <button onClick={() => setTodos([...spreadTodos, {id: null, task: '', completed: false, audition_id: props.id }])} className="border border-m-purple-500 w-full mt-4 rounded">
             <i className="fas fa-plus" />
           </button>
         </div>
@@ -38,7 +39,7 @@ export default function UpcomingAuditionInfo(props){
     function renderInstructions(){
         return props.instructions.map(instruction => {
             return (
-              <div className="mt-2">
+              <div className="mt-2" key={instruction.id}>
                 {`• ${instruction.instruction}`}
               </div>
             );
