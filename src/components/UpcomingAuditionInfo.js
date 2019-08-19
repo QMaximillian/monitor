@@ -4,25 +4,34 @@ import Task from '../components/Task'
 
 export default function UpcomingAuditionInfo(props){
 
-    const [todos, setTodos] = useState([
-      { task: "go to place", completed: false },
-      { task: "do thing", completed: false },
-      { task: "eat food", completed: false }
-    ]);
+    const [todos, setTodos] = useState(props.todos);
 
     // const instructions = ['Please arrive at 12am', 'Do not let actors use the bathroom on the first floor', 'Practice rooms are available on the 4th floor']
-    const [swap, setSwap] = useState('INSTRUCTIONS')
+    const [swap, setSwap] = useState('TODOS')
 
     function renderTodos() {
       const spreadTodos = [...todos];
 
-      return spreadTodos.map(todo => {
+      const todoList = spreadTodos.map(todo => {
         return (
-          <Task todo={todo} setTodos={setTodos} spreadTodos={spreadTodos}/>
+            <Task
+              todo={todo}
+              setTodos={setTodos}
+              spreadTodos={spreadTodos}
+            />
         );
       });
+
+      return (
+        <div>
+          {todoList}
+          <button onClick={() => setTodos([...spreadTodos, {value: '', completed: false }])} className="border border-m-purple-500 w-full mt-4 rounded">
+            <i class="fas fa-plus" />
+          </button>
+        </div>
+      );
     }
-    console.log(props.instructions)
+
 
     function renderInstructions(){
         return props.instructions.map(instruction => {
@@ -57,7 +66,7 @@ export default function UpcomingAuditionInfo(props){
              >
                <i className="fas fa-angle-double-right" />
              </button>
-             <div className="mt-6 flex flex-col justify-between">
+             <div className="mt-6 flex flex-col justify-between w-full">
                 {renderSwap()}
              </div>
            </div>

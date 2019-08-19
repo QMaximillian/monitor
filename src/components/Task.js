@@ -18,11 +18,12 @@ export default function Task(props){
            }}
            className="flex items-center mt-2"
          >
-           <input type="checkbox" value={props.todo.completed} />
+           <input type="checkbox" checked={props.todo.completed} value={props.todo.completed} />
            <input
              className="ml-px"
              onChange={handleInput}
              value={inputValue}
+             placeholder={'new todo'}
            />
          </div>
        );

@@ -57,17 +57,10 @@ function Home(props){
     return
   }
 
-  // function upcomingAudition(auditions) {
-  //   const futureAuditions = auditions
-  //     .sort((a, b) => new Date(a.date) - new Date(b.date))
-  //     .filter(audition => new Date(audition.date) > new Date());
-  //   return futureAuditions[0];
-  // }
-
                 if (loading) return 'Loading...'
                 if(error) return error
                 if (data && data.viewer) {
-                  console.log(data.viewer.upcoming_audition.instructions)
+
                   return (
                     <div className="flex w-full h-full">
                       <div className="w-1/4 flex flex-col h-full">
@@ -87,7 +80,7 @@ function Home(props){
                           audition={data.viewer.upcoming_audition}
                         />
                         <div className="mt-2 px-4 pt-4 h-full w-full border-b-0 border border-m-purple-500 rounded rounded-b-none">
-                          <UpcomingAuditionInfo instructions={data.viewer.upcoming_audition.instructions} />
+                          <UpcomingAuditionInfo todos={data.viewer.upcoming_audition.todos} instructions={data.viewer.upcoming_audition.instructions} />
                         </div>
                       </div>
                     </div>
@@ -128,6 +121,11 @@ function Home(props){
             instructions {
               id
               instruction
+            }
+            todos {
+              id
+              task
+              completed
             }
           }
         }
