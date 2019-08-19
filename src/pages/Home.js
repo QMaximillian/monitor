@@ -80,7 +80,7 @@ function Home(props){
                           audition={data.viewer.upcoming_audition}
                         />
                         <div className="mt-2 px-4 pt-4 h-full w-full border-b-0 border border-m-purple-500 rounded rounded-b-none">
-                          <UpcomingAuditionInfo todos={data.viewer.upcoming_audition.todos} instructions={data.viewer.upcoming_audition.instructions} />
+                          <UpcomingAuditionInfo todos={data.viewer.upcoming_audition.todos} instructions={data.viewer.upcoming_audition.instructions} id={data.viewer.upcoming_audition.id} />
                         </div>
                       </div>
                     </div>

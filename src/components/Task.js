@@ -1,32 +1,40 @@
 import React, {useState, useEffect} from 'react'
 import { useMutation } from '@apollo/react-hooks'
-import { UPDATE_TODO } from '../lib/mutations'
+import { UPDATE_TODO, SAVE_TODO } from '../lib/mutations'
+
 export default function Task(props){
 
-    const [inputValue, setInputValue] = useState(props.todo.task);
-    const [updateTodo, { loading, error, data }] = useMutation(UPDATE_TODO)
+    const [updateTodo, { data }] = useMutation(UPDATE_TODO)
+    const [saveTodo] = useMutation(SAVE_TODO)
 
-    function handleInput(event){
-        setInputValue(event.target.value);
-        props.todo.task = inputValue;
-        props.setTodos(props.spreadTodos)
+    async function handleInput(event){
+       
+        props.todo.task = event.target.value;
+        props.setTodos(props.spreadTodos);
+        // props.setTodos(props.spre props.todo.task = inputValue;adTodos)
     } 
+
+
+    // console.log(!props.id ? props.todo : null)
     
 
     useEffect(() => {
       let interval;
-        if (props.todo.id) {
-          interval = setInterval(() => {
-            updateTodo({ variables: { ...props.todo } });
-          }, 20000);
-        }
+      if (props.todo.id) {
+        interval = setInterval(() => {
+          updateTodo({ variables: { ...props.todo } });
+        }, 20000);
+        console.log(props.todo)
+      }
+      // console.log(props.todo);
+        
       // figure out how to stop the interval from firing if the todo is unchanged
-      return () => {
-        if (props.todo.id) {
-          clearInterval(interval);
+      return () =>  {
+        if (props.id) {
+            clearInterval(interval);
         }
       }
-    })
+    });
 
        return (
          <div className="flex items-center mt-2">
@@ -42,9 +50,13 @@ export default function Task(props){
            <input
              className="ml-px"
              onChange={handleInput}
-             value={inputValue}
+             value={props.todo.task}
              placeholder={"new todo"}
            />
+           {!props.todo.id ? <button onClick={async () => {
+             saveTodo({variables: { ...props.todo }})
+
+           }}>Save</button> : null}
          </div>
        );
 }

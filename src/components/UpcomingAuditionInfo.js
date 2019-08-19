@@ -4,11 +4,11 @@ import Task from '../components/Task'
 
 export default function UpcomingAuditionInfo(props){
 
-    const [todos, setTodos] = useState(props.todos  || [{value: '', completed: false}]);
+    const [todos, setTodos] = useState(props.todos  || [{task: '', completed: false}]);
 
     // const instructions = ['Please arrive at 12am', 'Do not let actors use the bathroom on the first floor', 'Practice rooms are available on the 4th floor']
     const [swap, setSwap] = useState('TODOS')
-  console.log(props)
+
     function renderTodos() {
       const spreadTodos = [...todos];
 
@@ -23,10 +23,11 @@ export default function UpcomingAuditionInfo(props){
         );
       });
 
+      // console.log('spreadTodos', spreadTodos)
       return (
         <div>
           {todoList}
-          <button onClick={() => setTodos([...spreadTodos, {value: '', completed: false }])} className="border border-m-purple-500 w-full mt-4 rounded">
+          <button onClick={() => setTodos([...spreadTodos, {task: '', completed: false, audition_id: props.id }])} className="border border-m-purple-500 w-full mt-4 rounded">
             <i className="fas fa-plus" />
           </button>
         </div>
