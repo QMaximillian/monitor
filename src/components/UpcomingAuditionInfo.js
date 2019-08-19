@@ -4,17 +4,18 @@ import Task from '../components/Task'
 
 export default function UpcomingAuditionInfo(props){
 
-    const [todos, setTodos] = useState(props.todos);
+    const [todos, setTodos] = useState(props.todos  || [{value: '', completed: false}]);
 
     // const instructions = ['Please arrive at 12am', 'Do not let actors use the bathroom on the first floor', 'Practice rooms are available on the 4th floor']
     const [swap, setSwap] = useState('TODOS')
-
+  console.log(props)
     function renderTodos() {
       const spreadTodos = [...todos];
 
       const todoList = spreadTodos.map(todo => {
         return (
             <Task
+              key={todo.id}
               todo={todo}
               setTodos={setTodos}
               spreadTodos={spreadTodos}
@@ -26,7 +27,7 @@ export default function UpcomingAuditionInfo(props){
         <div>
           {todoList}
           <button onClick={() => setTodos([...spreadTodos, {value: '', completed: false }])} className="border border-m-purple-500 w-full mt-4 rounded">
-            <i class="fas fa-plus" />
+            <i className="fas fa-plus" />
           </button>
         </div>
       );

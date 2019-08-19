@@ -126,6 +126,7 @@ function Home(props){
               id
               task
               completed
+              audition_id
             }
           }
         }
