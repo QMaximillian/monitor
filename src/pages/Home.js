@@ -20,10 +20,10 @@ function Home(props){
 
 
   function clearAllFilters() {
-  handleDateOrder("reset");
-  setAbbreviation({ value: "", label: "Pick a state" });
-  setDate(initialDateState);
-}
+    handleDateOrder("reset");
+    setAbbreviation({ value: "", label: "Pick a state" });
+    setDate(initialDateState);
+  }
 
 
 
@@ -128,6 +128,10 @@ function Home(props){
               completed
               audition_id
             }
+          }
+          roles {
+            id
+            role
           }
         }
       }

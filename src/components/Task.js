@@ -4,7 +4,7 @@ import { UPDATE_TODO, SAVE_TODO } from '../lib/mutations'
 
 export default function Task(props){
 
-    const [updateTodo, { data }] = useMutation(UPDATE_TODO)
+    const [updateTodo] = useMutation(UPDATE_TODO)
     const [saveTodo] = useMutation(SAVE_TODO)
     const [showButton, setShowButton] = useState(true)
 
@@ -12,11 +12,8 @@ export default function Task(props){
        
         props.todo.task = event.target.value;
         props.setTodos(props.spreadTodos);
-        // props.setTodos(props.spre props.todo.task = inputValue;adTodos)
     } 
 
-
-    // console.log(!props.id ? props.todo : null)
     
 
     useEffect(() => {
@@ -25,15 +22,12 @@ export default function Task(props){
         interval = setInterval(() => {
           updateTodo({ variables: { ...props.todo } });
         }, 20000);
-        // console.log(props.todo)
       }
-      // console.log(props.todo);
         
-      // figure out how to stop the interval from firing if the todo is unchanged
       return () =>  {
-        if (props.id) {
+          if (interval) {
             clearInterval(interval);
-        }
+          }
       }
     });
 
