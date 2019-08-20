@@ -3,13 +3,15 @@ import Login from './Login'
 import {Link} from 'react-router-dom'
 import { confirmLoggedIn } from "../lib/helpers";
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useApolloClient } from '@apollo/react-hooks'
+import {Redirect} from 'react-router-dom'
 
 function Layout(props) {
   const [showDropdown, setShowDropdown] = useState(false)
+  const [redirect, setRedirect] = useState(false)
   // const [loggedIn, setLoggedIn] = useState(confirmLoggedIn());
   const {loading, error, data} = useQuery(GET_VIEWER, { fetchPolicy: 'network-only'})
-
+  const client = useApolloClient()
   function renderDropdown(){
     return (
       showDropdown && (
@@ -51,7 +53,15 @@ function Layout(props) {
           {renderRightMenu()}
         </div>
         <div className="font-primary bg-m-off-white-200 h-full w-full border border-black px-4 pt-4">
+          <div onClick={async () => {
+            await client.cache.reset()
+            if (localStorage.getItem('token')) {
+              localStorage.removeItem('token')
+            }
+            setRedirect(true)
+          }}>LOGOUT</div>
           {props.children}
+          {redirect && <Redirect to="/"/>}
         </div>
       </div>
     );
