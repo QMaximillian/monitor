@@ -74,14 +74,16 @@ AppointmentScrollTab.propTypes = {
 
 AppointmentScrollTab.defaultProps = {
   appointment: {
-    first_name: 'Quinn',
-    last_name: 'Lashinsky',
-    email: 'quinnlashinsky@gmail.com',
-    phone: '973-634-7866',
-    equity: true,
-    gender: 'Male',
-    monologues: ['Take Me Out', 'The Iceman Cometh'],
-    songs: ['Driving Home on The Freeway', 'Nights']
+    user: {
+      first_name: 'Quinn',
+      last_name: 'Lashinsky',
+      email: 'quinnlashinsky@gmail.com',
+      phone: '973-634-7866',
+      equity: true,
+      gender: 'Male',
+      monologues: ['Take Me Out', 'The Iceman Cometh'],
+      songs: ['Driving Home on The Freeway', 'Nights']
+    }
   },
   appointmentTime: '2019-07-25T03:30:00+0000',
   auditionInterval: 30

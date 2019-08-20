@@ -45,8 +45,8 @@ function PrivateRoute({ component: Component, ...rest }) {
 function App(props) {
   const [redirect, setRedirect] = useState(false)
             return (
-              <Layout>
-                <Router>
+              <Router>
+                <Layout>
                   <Switch>
                     {/* <Route exact path="/login" component={Login} /> */}
                     <PrivateRoute
@@ -76,15 +76,14 @@ function App(props) {
                             >
                               Go To Login
                             </button>
-                            {redirect &&
-                              <Redirect to="/login" />}
+                            {redirect && <Redirect to="/" />}
                           </div>
                         );
                       }}
                     />
                   </Switch>
-                </Router>
-              </Layout>
+                </Layout>
+              </Router>
             );
   }
 

@@ -3,8 +3,7 @@ import jwt from "jsonwebtoken";
 
 
 
-export function getUserId() {
-
+export function confirmLoggedIn() {
 
      if (localStorage.getItem('token')) {
         const token = jwt.verify(localStorage.getItem("token"), "frindle")
