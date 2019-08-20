@@ -128,6 +128,10 @@ const LOGIN = gql`
       gender
       equity
       token
+      roles {
+        id
+        role
+      }
     }
   }
 `
@@ -141,6 +145,10 @@ const GET_VIEWER = gql`
       phone_number
       gender
       equity
+      roles {
+        id
+        role
+      }
     }
   }
 `;
