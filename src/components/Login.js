@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import TextBox from '../components/TextBox'
+import TextBox from './TextBox'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { Redirect } from 'react-router-dom'
