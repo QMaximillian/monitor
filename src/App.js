@@ -18,7 +18,7 @@ function PrivateRoute({ component: Component, ...rest }) {
                   if (!authToken) {
                     return <Redirect
                     to={{
-                      pathname: "/login"
+                      pathname: "/"
                     }}
                   />
                   }
@@ -32,7 +32,7 @@ function PrivateRoute({ component: Component, ...rest }) {
                     return (
                       <Redirect
                         to={{
-                          pathname: "/login",
+                          pathname: "/",
                         }}
                     />
                     )
