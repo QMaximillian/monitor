@@ -29,7 +29,7 @@ export default function Navigation(props){
            <div className="border border-red-500 h-10 justify-between flex items-center px-10">
              <Link to="/">MONITOR</Link>
              {props.viewer ? (
-               <div>
+               <div className="flex">
                  <div>{props.viewer.first_name}</div>
                  <div
                    onClick={async () => {
