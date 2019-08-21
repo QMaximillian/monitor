@@ -48,16 +48,15 @@ function App(props) {
               <Router>
                 <Layout>
                   <Switch>
-                    {/* <Route exact path="/login" component={Login} /> */}
-                    <PrivateRoute
+                    {/* <PrivateRoute
                       exact
                       path="/monitor-view"
                       component={MonitorView}
-                    />
+                    /> */}
                     <PrivateRoute
                       exact
                       path="/monitor/home"
-                      component={Home}
+                      component={Home} 
                     />
                     <PrivateRoute
                       exact

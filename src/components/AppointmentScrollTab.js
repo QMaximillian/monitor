@@ -58,15 +58,17 @@ export default AppointmentScrollTab;
 
 AppointmentScrollTab.propTypes = {
   appointment: PropTypes.shape({
-    first_name: PropTypes.string.isRequired,
-    last_name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    equity: PropTypes.bool.isRequired,
-    gender: PropTypes.string.isRequired,
-    monologues: PropTypes.array,
-    songs: PropTypes.array,
-    key: PropTypes.number
+    user: PropTypes.shape({
+      first_name: PropTypes.string.isRequired,
+      last_name: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      phone_number: PropTypes.string.isRequired,
+      equity: PropTypes.bool.isRequired,
+      gender: PropTypes.string.isRequired,
+      monologues: PropTypes.array,
+      songs: PropTypes.array,
+      key: PropTypes.number
+    })
   }),
   appointmentTime: PropTypes.any.isRequired,
   auditionInterval: PropTypes.number.isRequired
@@ -78,7 +80,7 @@ AppointmentScrollTab.defaultProps = {
       first_name: 'Quinn',
       last_name: 'Lashinsky',
       email: 'quinnlashinsky@gmail.com',
-      phone: '973-634-7866',
+      phone_number: '973-634-7866',
       equity: true,
       gender: 'Male',
       monologues: ['Take Me Out', 'The Iceman Cometh'],
