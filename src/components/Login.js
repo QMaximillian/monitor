@@ -13,13 +13,12 @@ function Login(props){
   const [email, setEmail] = useState({value: '', isValid: false})
   const [password, setPassword] = useState({value: '', isValid: false})
   const [redirect, setRedirect] = useState(false)
-  const [login, {error}] = useMutation(LOGIN, {
+  const [login, {data, error, loading}] = useMutation(LOGIN, {
     variables: {
       email: email.email && email.email.value,
       password: password.password && password.password.value
     },
     update: (cache, {data: {login}}) => {
-      console.log(login)
       cache.writeQuery({
         query: GET_VIEWER,
         data: { viewer: login }
@@ -35,17 +34,17 @@ function Login(props){
 
   async function handleLogin(event){
       event.preventDefault();
-      const result = await login()
-
+      
+       login()
+      console.log('data', data)
       try {
         if (
-          result &&
-          result.data &&
-          result.data.login &&
-          result.data.login.token
+          data &&
+          data.login &&
+          data.login.token
         ) {
 
-          localStorage.setItem("token", result.data.login.token);
+          localStorage.setItem("token", data.login.token);
         }
       } catch (error) {
         console.log(error);
@@ -55,6 +54,7 @@ function Login(props){
 
       
     if (error) return error
+    console.log('data2', data)
               return (
                 <animated.div
                   style={fade}

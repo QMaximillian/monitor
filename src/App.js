@@ -56,7 +56,7 @@ function App(props) {
                     />
                     <PrivateRoute
                       exact
-                      path="/home"
+                      path="/monitor/home"
                       component={Home}
                     />
                     <PrivateRoute

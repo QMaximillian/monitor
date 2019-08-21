@@ -33,6 +33,10 @@ const GET_VIEWER = gql`
           phone_number
           gender
           equity
+          roles {
+            id
+            role
+          }
         }
       }
 `
