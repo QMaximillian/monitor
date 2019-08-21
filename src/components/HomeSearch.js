@@ -55,7 +55,7 @@ export default function HomeSearch(props){
                       key={audition.id}
                     >
                       <Link
-                        to={`monitor-audition/${audition.id}`}
+                        to={`/monitor-audition/${audition.id}`}
                         className="relative bg-white rounded border border-m-purple-500 h-32 w-full shadow-lg"
                       >
                         <div className="ml-2 absolute bottom-0 left-0 text-2xl">

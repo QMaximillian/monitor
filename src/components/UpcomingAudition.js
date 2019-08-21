@@ -34,7 +34,7 @@ export default function UpcomingAudition(props){
           <Link
             onMouseEnter={() => setArrowHover(true)}
             onMouseLeave={() => setArrowHover(false)}
-            to={`monitor-audition/${props.audition.id}`}
+            to={`/monitor-audition/${props.audition.id}`}
           >
             <i className="pr-4 pb-1 absolute bottom-0 right-0 text-3xl text-m-purple-500 rounded fas fa-arrow-right" />
           </Link>

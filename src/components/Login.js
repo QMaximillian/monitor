@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TextBox from './TextBox'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import { Redirect } from 'react-router-dom'
 import { useSpring, animated } from 'react-spring'
 
@@ -9,7 +9,7 @@ import { useSpring, animated } from 'react-spring'
 function Login(props){
   
 
-  
+  const client = useApolloClient()
   const [email, setEmail] = useState({value: '', isValid: false})
   const [password, setPassword] = useState({value: '', isValid: false})
   const [redirect, setRedirect] = useState(false)
@@ -18,11 +18,14 @@ function Login(props){
       email: email.email && email.email.value,
       password: password.password && password.password.value
     },
-    update: (cache, {data: {login}}) => {
-      cache.writeQuery({
-        query: GET_VIEWER,
-        data: { viewer: login }
-      })
+    onCompleted({ login }) {
+      localStorage.setItem('token', login.token) 
+      console.log('data3', login)
+      window.location.reload();
+      //   client.writeQuery({
+      //     query: GET_VIEWER,
+      //     data: { viewer: login }
+      // });
     }
   });
   const fade = useSpring({
@@ -32,29 +35,15 @@ function Login(props){
     opacity: 1
   })
 
-  async function handleLogin(event){
-      event.preventDefault();
-      
-       login()
-      console.log('data', data)
-      try {
-        if (
-          data &&
-          data.login &&
-          data.login.token
-        ) {
 
-          localStorage.setItem("token", data.login.token);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-
+function handleLogin(){
+  login()
+  
+}
       
     if (error) return error
-    console.log('data2', data)
+    console.log("data2", data);
+
               return (
                 <animated.div
                   style={fade}

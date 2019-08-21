@@ -61,9 +61,7 @@ export default function Navigation(props){
                  <div
                    className="mx-4"
                    onClick={async () => {
-                     if (localStorage.getItem("token")) {
-                       localStorage.removeItem("token");
-                     }
+                       localStorage.clear()
                      console.log("localStorage", localStorage);
 
                      setShowDropdown(false);
