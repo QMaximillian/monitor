@@ -31,6 +31,7 @@ export default function Navigation(props){
       const lowerCaseRole = role.role.toLowerCase();
       return (
         <Link
+          key={role.id}
           onClick={() => setShowRoutes(!showRoutes)}
           className=""
           to={`/${lowerCaseRole}/home`}

@@ -13,7 +13,6 @@ export default function UpcomingAuditionInfo(props){
       const spreadTodos = [...todos];
 
       const todoList = spreadTodos.map(todo => {
-        console.log(todo.task, todo.id)
         return (
             <Task
               key={todo.id}
