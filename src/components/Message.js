@@ -1,18 +1,17 @@
 import React from "react";
 import PropTypes from 'prop-types'
 
-class Message extends React.Component {
-  render() {
+export default function Message(props) {
+  console.log("text", props.message.text);
     return (
         <div className="border-orange-500 border">
-            <div>{this.props.createdAt}</div>
-            <div>{this.props.text}</div>
+            {/* <div>{this.props.message.createdAt}</div> */}
+            <div>{props.message.text}</div>
         </div>
     )
+    
   }
-}
 
-export default Message;
 
 
 Message.propTypes = {

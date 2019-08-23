@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 import TextBox from './TextBox'
 import gql from 'graphql-tag'
-import { useMutation, useApolloClient } from '@apollo/react-hooks'
-import { Redirect } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
 import { useSpring, animated } from 'react-spring'
 
 
 function Login(props){
   
 
-  const client = useApolloClient()
+
   const [email, setEmail] = useState({value: '', isValid: false})
   const [password, setPassword] = useState({value: '', isValid: false})
-  const [redirect, setRedirect] = useState(false)
   const [login, {data, error, loading}] = useMutation(LOGIN, {
     variables: {
       email: email.email && email.email.value,
@@ -20,12 +18,8 @@ function Login(props){
     },
     onCompleted({ login }) {
       localStorage.setItem('token', login.token) 
-      console.log('data3', login)
+
       window.location.reload();
-      //   client.writeQuery({
-      //     query: GET_VIEWER,
-      //     data: { viewer: login }
-      // });
     }
   });
   const fade = useSpring({
@@ -99,7 +93,6 @@ function handleLogin(){
                       <button onClick={handleLogin}>
                         Submit
                       </button>
-                      {redirect ? <Redirect push to={"/home"} /> : null}
                     </div>
                 </animated.div>
               );
@@ -124,22 +117,5 @@ const LOGIN = gql`
     }
   }
 `
-const GET_VIEWER = gql`
-  query {
-    viewer {
-      id
-      first_name
-      last_name
-      email
-      phone_number
-      gender
-      equity
-      roles {
-        id
-        role
-      }
-    }
-  }
-`;
 
 export default Login

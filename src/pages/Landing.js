@@ -1,9 +1,7 @@
 import React from 'react'
 
 export default function Landing(props){
-  const loremIpsum =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio sapien, blandit et mi eget, euismod vestibulum est. Nam dictum, eros sed sagittis sagittis, lorem odio sodales diam, et egestas justo dui non elit. Donec faucibus quis orci vel molestie. Morbi lobortis, neque et vestibulum suscipit, purus mi vestibulum mi, quis pharetra nisi dolor non ex.";
-       
+         
     return (
       <div className="h-full w-full px-4">
         <div className="flex px-4">

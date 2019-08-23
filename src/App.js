@@ -3,6 +3,7 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import MonitorView from './pages/MonitorView'
 import Landing from './pages/Landing'
+import ActorHome from './pages/ActorHome'
 import './index.css';
 import jwt from "jsonwebtoken";
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
@@ -53,6 +54,11 @@ function App(props) {
                       path="/monitor-view"
                       component={MonitorView}
                     /> */}
+                    <PrivateRoute
+                      exact
+                      path="/actor/home"
+                      component={ActorHome} 
+                    />
                     <PrivateRoute
                       exact
                       path="/monitor/home"
