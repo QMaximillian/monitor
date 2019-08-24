@@ -8,7 +8,7 @@ import Navigation from './Navigation'
 
 function Layout(props) {
 
-  // const [loggedIn, setLoggedIn] = useState(confirmLoggedIn());
+
   const {loading, error, data} = useQuery(GET_VIEWER, { fetchPolicy: 'network-only'})
   
   

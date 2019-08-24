@@ -36,7 +36,6 @@ function handleLogin(){
 }
       
     if (error) return error
-    console.log("data2", data);
 
               return (
                 <animated.div

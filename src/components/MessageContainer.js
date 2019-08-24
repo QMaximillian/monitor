@@ -1,10 +1,9 @@
-import React, { useState} from "react";
-import { useMutation, useSubscription, useQuery } from "@apollo/react-hooks";
+import React, { useState, useEffect } from "react";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 
 import gql from "graphql-tag";
 import Message from './Message'
 import TextBox from './TextBox'
-
 
 function MessageContainer(props){
   const { audition_id } = props
@@ -12,10 +11,32 @@ const [message, setMessage] = useState({ value: "", isValid: false });
 const [createMessage] = useMutation(CREATE_MESSAGE, {
   variables: { text: message.message && message.message.value, audition_id }
 });
-const {data, loading} = useSubscription(MESSAGE_SUBSCRIPTION)
-const {data: { getAllMessages }, loading: queryLoading, error: queryError} = useQuery(GET_AUDITION_MESSAGES, {variables: { audition_id }})
 
-console.log(!loading && data && data.messageCreated && data.messageCreated.text)
+const {data: { getAllMessages }, loading: queryLoading, error: queryError, subscribeToMore} = useQuery(GET_AUDITION_MESSAGES, 
+    {
+      variables: { audition_id },
+    }
+  )
+
+  useEffect(() => {
+    const unsubscribe = subscribeToMore({
+      document: MESSAGE_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData) return prev;
+        console.log(subscriptionData);
+        return {
+          getAllMessages: [
+            ...prev.getAllMessages,
+            subscriptionData.data.messageCreated
+          ]
+        };
+      }
+    });
+
+    return () => unsubscribe()
+  })
+
+
     return (
       <div>
         <div className="flex justify-between">
@@ -37,9 +58,10 @@ console.log(!loading && data && data.messageCreated && data.messageCreated.text)
           </div>
           <button
             className="rounded mb-1 border border-m-purple-500 px-4"
-            onClick={() => {
-              createMessage();
-              setMessage("");
+            onClick={async () => {
+              // if (!message) return 
+              await createMessage();
+              setMessage({ value: "", isValid: false });;
             }}
           >
             Send
@@ -48,11 +70,8 @@ console.log(!loading && data && data.messageCreated && data.messageCreated.text)
         <div className="flex w-full border border-blue-500 border-4 mt-px justify-end">
           <div>
             <div className="h-56 overflow-y-scroll w-full border border-red-500">
-              {/* {new Array(20).fill(Message).map((Message, i) => (
-                <Message key={i} />
-              ))} */}
+{console.log('getAllMessages', getAllMessages)}
               {getAllMessages && getAllMessages.map(message => {
-                console.log(message)
                   return <Message key={message.id} message={message} />;
               })}
               {/* {console.log(queryData)} */}
@@ -74,7 +93,7 @@ const CREATE_MESSAGE = gql`
 `;
 
 const MESSAGE_SUBSCRIPTION = gql`
-subscription messageCreated{
+subscription messageCreated {
   messageCreated {
     id
     text
