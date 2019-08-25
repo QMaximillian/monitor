@@ -36,8 +36,8 @@ function MonitorView(props){
         <div className="flex w-full border border-black justify-center">
           <div className="flex flex-col justify-between w-full">
             <div className="flex border border-black w-full">
-              <div className="flex flex-col w-full p-4">
-                <MessageContainer audition_id={data.audition.id} user_id={data.viewer.id}/>
+              <div className="flex flex-col w-full">
+                <MessageContainer audition_id={data.audition.id} viewer={data.viewer}/>
               </div>
             </div>
             <div className="h-full flex flex-row justify-center w-full">

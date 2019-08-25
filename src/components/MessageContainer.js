@@ -6,10 +6,12 @@ import Message from './Message'
 import TextBox from './TextBox'
 
 function MessageContainer(props){
-  const { audition_id, user_id } = props
+  const { id: user_id, first_name, last_name  } = props.viewer
+  const { audition_id } = props
+
 const [message, setMessage] = useState({ value: "", isValid: false });
 const [createMessage] = useMutation(CREATE_MESSAGE, {
-  variables: { text: message.message && message.message.value, audition_id, user_id }
+  variables: { text: message.message && message.message.value, audition_id, user_id, first_name, last_name }
 });
 
 const {data: { getAllMessages }, loading: queryLoading, error: queryError, subscribeToMore} = useQuery(GET_AUDITION_MESSAGES, 
@@ -23,7 +25,7 @@ const {data: { getAllMessages }, loading: queryLoading, error: queryError, subsc
       document: MESSAGE_SUBSCRIPTION,
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData) return prev;
-        console.log(subscriptionData);
+        // console.log(subscriptionData);
         return {
           getAllMessages: [
             ...prev.getAllMessages,
@@ -67,19 +69,14 @@ const {data: { getAllMessages }, loading: queryLoading, error: queryError, subsc
             Send
           </button>
         </div>
-        <div className="flex w-full border border-blue-500 border-4 mt-px">
+        <div className="flex w-full border-4 mt-px">
 
-            <div className="h-56 overflow-y-scroll w-full flex flex-col w-full">
-              {console.log("getAllMessages", getAllMessages)}
+            <div className="h-56 overflow-y-scroll w-full flex flex-col w-full px-4">
+
               {getAllMessages &&
                 getAllMessages.map(message => {
                     return (
-                      <div
-                        className={`border border-m-blue-500 self-start my-2 
-                        ${user_id === message.user_id ? 'self-end ml-24' : 'self-start mr-24'}`}
-                      >
-                        <Message key={message.id} message={message} />
-                      </div>
+                        <Message key={message.id} message={message} user_id={user_id}/>
                     );
                 })}
             </div>
@@ -90,12 +87,14 @@ const {data: { getAllMessages }, loading: queryLoading, error: queryError, subsc
   }
 
 const CREATE_MESSAGE = gql`
-  mutation createMessage($text: String!, $audition_id: String!, $user_id: String) {
-    createMessage(text: $text, audition_id: $audition_id, user_id: $user_id) {
+  mutation createMessage($text: String!, $audition_id: String!, $user_id: String!, $first_name: String!, $last_name: String!) {
+    createMessage(text: $text, audition_id: $audition_id, user_id: $user_id, first_name: $first_name, last_name: $last_name) {
       id
-      text
-      audition_id
-      user_id
+      # text
+      # audition_id
+      # user_id
+      # first_name
+      # last_name
     }
   }
 `;
@@ -107,6 +106,8 @@ subscription messageCreated {
     text
     audition_id
     user_id
+    first_name
+    last_name
   }
 }`
 
@@ -117,6 +118,8 @@ const GET_AUDITION_MESSAGES = gql`
       text
       audition_id
       user_id
+      first_name
+      last_name
     }
   }
 `

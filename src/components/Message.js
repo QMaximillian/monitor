@@ -2,13 +2,31 @@ import React from "react";
 import PropTypes from 'prop-types'
 
 export default function Message(props) {
-  console.log("text", props.message.text);
+
+	function messageSide(){
+		return props.message.user_id === props.user_id ? 'justify-end' : 'justify-start'
+	}
     return (
-        <div className="border-orange-500 border">
-            {/* <div>{this.props.message.createdAt}</div> */}
-            <div>{props.message.text}</div>
+      <div
+        className={`my-1 max-w-xl
+                        ${
+                          props.user_id === props.message.user_id
+                            ? "self-end"
+                            : "self-start"
+                        }`}
+      >
+        <div className="w-full flex-col">
+          <div className={`text-xs opacity-25 flex ${messageSide()}`}>
+            <div>{`${props.message.first_name} ${props.message.last_name}`}</div>
+          </div>
+          <div className={`flex ${messageSide()}`}>
+            <div className="border-m-purple-500 border rounded px-1">
+              {props.message.text}
+            </div>
+          </div>
         </div>
-    )
+      </div>
+    );
     
   }
 
