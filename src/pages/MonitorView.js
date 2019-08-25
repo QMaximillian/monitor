@@ -26,7 +26,6 @@ function MonitorView(props){
   if (loading) return `Loading...`
   if (error) return `Error: ${error}`
   if (data && data.viewer && data.audition) {
-    console.log(data.audition.id)
     return (
       <div className="flex">
         <AppointmentScroll
@@ -38,7 +37,7 @@ function MonitorView(props){
           <div className="flex flex-col justify-between w-full">
             <div className="flex border border-black w-full">
               <div className="flex flex-col w-full p-4">
-                <MessageContainer audition_id={data.audition.id}/>
+                <MessageContainer audition_id={data.audition.id} user_id={data.viewer.id}/>
               </div>
             </div>
             <div className="h-full flex flex-row justify-center w-full">
