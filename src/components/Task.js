@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { UPDATE_TODO, SAVE_TODO } from '../lib/mutations'
 
+
 export default function Task(props){
 
-    const [updateTodo] = useMutation(UPDATE_TODO)
+    const [updateTodo] = useMutation(UPDATE_TODO, { onCompleted: () => props.setAllTodosSaved(prev => prev - 1)})
     const [saveTodo] = useMutation(SAVE_TODO)
     const [showButton, setShowButton] = useState(true)
 
@@ -14,14 +15,14 @@ export default function Task(props){
         props.setTodos(props.spreadTodos);
     } 
 
-    
-
     useEffect(() => {
+
       let interval;
       if (props.todo.id) {
         interval = setInterval(() => {
-          updateTodo({ variables: { ...props.todo } });
+          updateTodo({ variables: props.todo });
         }, 20000);
+
       }
         
       return () =>  {
