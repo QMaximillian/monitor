@@ -54,12 +54,11 @@ export default function Task(props){
                variables: { ...props.todo },
                onCompleted: setShowButton(false)
              });
-            //  console.log(data)
               props.todo.id = data.saveTodo && data.saveTodo.id
-              console.log('data', data)
-              console.log('data.saveTodo', data.saveTodo)
-              console.log('data.saveTodo.id', data.saveTodo.id)
-              console.log('props.todo.id', props.todo.id)
+              // console.log('data', data)
+              // console.log('data.saveTodo', data.saveTodo)
+              // console.log('data.saveTodo.id', data.saveTodo.id)
+              // console.log('props.todo.id', props.todo.id)
               
            }}>Save</button>}
          </div>
