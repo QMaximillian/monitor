@@ -31,7 +31,7 @@ export default function Task(props){
           }
       }
     });
-
+    // console.log(props.todo.task, props.todo.id)
        return (
          <div className="flex items-center mt-2">
            <input
@@ -50,9 +50,17 @@ export default function Task(props){
              placeholder={"new todo"}
            />
            {!props.todo.id && showButton && <button onClick={async () => {
-             saveTodo({variables: { ...props.todo }})
-              console.log(props.todo)
-              setShowButton(false)
+              const { data } = await saveTodo({
+               variables: { ...props.todo },
+               onCompleted: setShowButton(false)
+             });
+            //  console.log(data)
+              props.todo.id = data.saveTodo && data.saveTodo.id
+              console.log('data', data)
+              console.log('data.saveTodo', data.saveTodo)
+              console.log('data.saveTodo.id', data.saveTodo.id)
+              console.log('props.todo.id', props.todo.id)
+              
            }}>Save</button>}
          </div>
        );
