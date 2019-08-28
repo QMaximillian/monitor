@@ -10,6 +10,7 @@ function MessageContainer(props){
   const { audition_id } = props
 
 const [message, setMessage] = useState({ value: "", isValid: false });
+const [toggleOpen, setToggleOpen] = useState(false)
 const [createMessage] = useMutation(CREATE_MESSAGE, {
   variables: { text: message.message && message.message.value, audition_id, user_id, first_name, last_name }
 });
@@ -19,6 +20,57 @@ const {data: { getAllMessages }, loading: queryLoading, error: queryError, subsc
       variables: { audition_id },
     }
   )
+
+  function renderChatBox(){
+    if (toggleOpen) {
+      return (
+        <div>
+          <div className="h-56 overflow-y-scroll w-full flex flex-col w-full px-1 pb-2">
+            {getAllMessages &&
+              getAllMessages.map(message => {
+                return (
+                  <Message
+                    key={message.id}
+                    message={message}
+                    user_id={user_id}
+                  />
+                );
+              })}
+          </div>
+
+          <div className="flex justify-between">
+            <div className="flex-1 mr-4">
+              <TextBox
+                name="message"
+                type="text"
+                placeholder="Send a message to all"
+                value={message.message && message.message.value}
+                onChange={({ name, isValid, value }) =>
+                  setMessage({
+                    [name]: {
+                      value,
+                      isValid
+                    }
+                  })
+                }
+              />
+            </div>
+            <button
+              className="rounded mb-1 border border-m-purple-500 px-4"
+              onClick={async () => {
+                // if (!message) return
+                await createMessage();
+                setMessage({ value: "", isValid: false });
+              }}
+            >
+              Send
+            </button>
+          </div>
+        </div>
+      ); 
+  }
+}
+  
 
   useEffect(() => {
     const unsubscribe = subscribeToMore({
@@ -40,48 +92,11 @@ const {data: { getAllMessages }, loading: queryLoading, error: queryError, subsc
 
 
     return (
-      <div>
-        <div className="flex justify-between">
-          <div className="flex-1 mr-4">
-            <TextBox
-              name="message"
-              type="text"
-              placeholder="Send a message to all"
-              value={message.message && message.message.value}
-              onChange={({ name, isValid, value }) =>
-                setMessage({
-                  [name]: {
-                    value,
-                    isValid
-                  }
-                })
-              }
-            />
-          </div>
-          <button
-            className="rounded mb-1 border border-m-purple-500 px-4"
-            onClick={async () => {
-              // if (!message) return
-              await createMessage();
-              setMessage({ value: "", isValid: false });
-            }}
-          >
-            Send
-          </button>
+      <div >
+        <div onClick={() => setToggleOpen(!toggleOpen)} className="flex w-full border-4 mt-px">
+          <div>Chat</div>
         </div>
-        <div className="flex w-full border-4 mt-px">
-
-            <div className="h-56 overflow-y-scroll w-full flex flex-col w-full px-4">
-
-              {getAllMessages &&
-                getAllMessages.map(message => {
-                    return (
-                        <Message key={message.id} message={message} user_id={user_id}/>
-                    );
-                })}
-            </div>
-
-        </div>
+        {renderChatBox()}
       </div>
     );
   }

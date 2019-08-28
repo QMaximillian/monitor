@@ -87,7 +87,7 @@ export default function Navigation(props){
                </div>
              )}
            </div>
-           <div className="font-primary bg-m-off-white-200 h-full w-full border border-black px-4 pt-4" />
+           <div className="font-primary bg-m-off-white-200 h-full w-full border border-black" />
          </div>
        );
 }

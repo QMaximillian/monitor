@@ -16,8 +16,8 @@ function Layout(props) {
   
     return (
       <div className="h-screen w-screen">
-        <Navigation viewer={data && data.viewer} />
-        {props.children}
+          <Navigation viewer={data && data.viewer} />
+          {props.children}
       </div>
     );
 }

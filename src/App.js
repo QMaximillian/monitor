@@ -46,49 +46,47 @@ function PrivateRoute({ component: Component, ...rest }) {
 function App(props) {
   const [redirect, setRedirect] = useState(false)
             return (
-              <Router>
-                <Layout>
-                  <Switch>
-                    {/* <PrivateRoute
+                <Router>
+                  <Layout>
+                    <Switch>
+                      {/* <PrivateRoute
                       exact
                       path="/monitor-view"
                       component={MonitorView}
                     /> */}
-                    <PrivateRoute
-                      exact
-                      path="/actor/home"
-                      component={ActorHome} 
-                    />
-                    <PrivateRoute
-                      exact
-                      path="/monitor/home"
-                      component={Home} 
-                    />
-                    <PrivateRoute
-                      exact
-                      path="/monitor-audition/:id"
-                      component={MonitorView}
-                    />
-                    <Route exact path="/" component={Landing} />
-                    <Route
-                      exact
-                      component={props => {
-                        return (
-                          <div>
-                            <div>No Match</div>
-                            <button
-                              onClick={() => setRedirect(true)}
-                            >
-                              Go To Login
-                            </button>
-                            {redirect && <Redirect to="/" />}
-                          </div>
-                        );
-                      }}
-                    />
-                  </Switch>
-                </Layout>
-              </Router>
+                      <PrivateRoute
+                        exact
+                        path="/actor/home"
+                        component={ActorHome}
+                      />
+                      <PrivateRoute
+                        exact
+                        path="/monitor/home"
+                        component={Home}
+                      />
+                      <PrivateRoute
+                        exact
+                        path="/monitor-audition/:id"
+                        component={MonitorView}
+                      />
+                      <Route exact path="/" component={Landing} />
+                      <Route
+                        exact
+                        component={props => {
+                          return (
+                            <div>
+                              <div>No Match</div>
+                              <button onClick={() => setRedirect(true)}>
+                                Go To Login
+                              </button>
+                              {redirect && <Redirect to="/" />}
+                            </div>
+                          );
+                        }}
+                      />
+                    </Switch>
+                  </Layout>
+                </Router>
             );
   }
 
