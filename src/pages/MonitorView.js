@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AppointmentScroll from "../components/AppointmentScroll";
-
+import UpcomingAppointment from '../components/UpcomingAppointment'
 import MessageContainer from "../components/MessageContainer";
 
 import ActorProfileContainer from '../components/ActorProfileContainer'
@@ -22,12 +22,14 @@ function MonitorView(props){
 
 
 
+
   
   if (loading) return `Loading...`
   if (error) return `Error: ${error}`
   if (data && data.viewer && data.audition) {
     return (
       <div className="flex">
+        {/* {upcomingAppointmentData && console.log(upcomingAppointmentData)} */}
         <AppointmentScroll
           setSelectedActor={setSelectedActor}
           appointments={data.audition.appointments}
@@ -40,7 +42,7 @@ function MonitorView(props){
               viewer={data.viewer}
             />
           </div>
-
+      <UpcomingAppointment audition_id={props.match.params.id}/>
           {/* <div className="h-full flex flex-row justify-center w-full"> */}
           {/* <ActorProfileContainer selectedActor={selectedActor} />
               <ChatContainer /> */}
@@ -91,5 +93,7 @@ const GET_MONITOR_VIEWER_AND_AUDITION = gql`
     }
   }
 `;
+
+
 
 export default MonitorView;
