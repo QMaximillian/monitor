@@ -21,6 +21,8 @@ const {data: { getAllMessages }, loading: queryLoading, error: queryError, subsc
     }
   )
 
+  console.log(getAllMessages)
+
   function renderChatBox(){
     if (toggleOpen) {
       return (
