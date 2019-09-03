@@ -29,35 +29,54 @@ function Login(props){
     opacity: 1
   })
 
-
-function handleLogin(){
-  login()
-  
-}
-      
-    if (error) return error
-
-              return (
-                <animated.div
-                  style={fade}
-                  className="justify-center flex items-center h-full w-full"
-                >
-                    <div className="flex flex-col flex-1 items-center">
-                      <div>Sign In to Monitor</div>
-                      <label
-                        className="text-black text-sm font-bold mb-2"
-                        htmlFor="email"
-                      >
-                        Email
-                      </label>
-                      <div className="mx-auto">
+      if (loading) return 'Loading...'
+      if (error) return error
+      if (data) {
+                return (
+                  <animated.div
+                    style={fade}
+                    className="justify-center flex items-center h-full w-full"
+                  >
+                      <div className="flex flex-col flex-1 items-center">
+                        <div>Sign In to Monitor</div>
+                        <label
+                          className="text-black text-sm font-bold mb-2"
+                          htmlFor="email"
+                        >
+                          Email
+                        </label>
+                        <div className="mx-auto">
+                          <TextBox
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            value={email.email && email.email.value}
+                            onChange={({ name, isValid, value }) =>
+                              setEmail({
+                                [name]: {
+                                  value,
+                                  isValid
+                                }
+                              })
+                            }
+                          />
+                        </div>
+                        <label
+                          className="text-black text-sm font-bold mb-2"
+                          htmlFor="password"
+                        >
+                          Password
+                        </label>
                         <TextBox
-                          name="email"
-                          type="email"
-                          placeholder="Email"
-                          value={email.email && email.email.value}
+                          name="password"
+                          type="password"
+                          placeholder="Password"
+                          value={
+                            password.password &&
+                            password.password.value
+                          }
                           onChange={({ name, isValid, value }) =>
-                            setEmail({
+                            setPassword({
                               [name]: {
                                 value,
                                 isValid
@@ -65,36 +84,13 @@ function handleLogin(){
                             })
                           }
                         />
+                        <button onClick={login}>
+                          Submit
+                        </button>
                       </div>
-                      <label
-                        className="text-black text-sm font-bold mb-2"
-                        htmlFor="password"
-                      >
-                        Password
-                      </label>
-                      <TextBox
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        value={
-                          password.password &&
-                          password.password.value
-                        }
-                        onChange={({ name, isValid, value }) =>
-                          setPassword({
-                            [name]: {
-                              value,
-                              isValid
-                            }
-                          })
-                        }
-                      />
-                      <button onClick={handleLogin}>
-                        Submit
-                      </button>
-                    </div>
-                </animated.div>
-              );
+                  </animated.div>
+                )
+      }
     }   
 
 

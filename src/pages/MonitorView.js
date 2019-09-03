@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import AppointmentScroll from "../components/AppointmentScroll";
 import UpcomingAppointment from '../components/UpcomingAppointment'
 import MessageContainer from "../components/MessageContainer";
-
-import ActorProfileContainer from '../components/ActorProfileContainer'
-import ChatContainer from '../components/ChatContainer'
+import ActorAppointmentOptions from '../components/ActorAppointmentOptions'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks';
 
@@ -35,18 +33,20 @@ function MonitorView(props){
           appointments={data.audition.appointments}
           interval={data.audition.interval}
         />
-        <div className="flex w-full border border-black justify-center">
-          <div className="ml-auto mt-auto mr-16 w-64  border border-black">
-            <MessageContainer
-              audition_id={data.audition.id}
-              viewer={data.viewer}
-            />
+        <div className="flex w-full border border-black">
+          <div className="h-full flex flex-row justify-center w-3/4 border border-red-500 relative">
+            <ActorAppointmentOptions selectedActor={selectedActor} />
+            <div className="mr-16 w-64 border border-black absolute bottom-0 right-0">
+              <MessageContainer
+                audition_id={data.audition.id}
+                viewer={data.viewer}
+              />
+            </div>
           </div>
-      <UpcomingAppointment audition_id={props.match.params.id}/>
-          {/* <div className="h-full flex flex-row justify-center w-full"> */}
-          {/* <ActorProfileContainer selectedActor={selectedActor} />
-              <ChatContainer /> */}
-          {/* </div> */}
+
+          <div className="w-1/4">
+            <UpcomingAppointment audition_id={props.match.params.id} />
+          </div>
         </div>
       </div>
     );
@@ -55,7 +55,7 @@ function MonitorView(props){
 
 
 const GET_MONITOR_VIEWER_AND_AUDITION = gql`
-  query ($audition_id: String!) {
+  query($audition_id: String!) {
     viewer {
       id
       first_name
@@ -88,6 +88,9 @@ const GET_MONITOR_VIEWER_AND_AUDITION = gql`
           equity
           gender
           email
+          feet
+          inches
+          birthday
         }
       }
     }

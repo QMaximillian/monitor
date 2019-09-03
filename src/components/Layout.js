@@ -13,13 +13,16 @@ function Layout(props) {
   
   
 
-  
-    return (
-      <div className="h-screen w-screen">
-          <Navigation viewer={data && data.viewer} />
-          {props.children}
-      </div>
-    );
+    if (loading) return 'Loading...'
+    if (error) return console.log(error)
+    if (data) {
+      return (
+        <div className="h-screen w-screen">
+            <Navigation viewer={data && data.viewer} />
+            {props.children}
+        </div>
+      );
+    }
 }
 
 const GET_VIEWER = gql`

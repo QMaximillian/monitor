@@ -15,13 +15,11 @@ const [createMessage] = useMutation(CREATE_MESSAGE, {
   variables: { text: message.message && message.message.value, audition_id, user_id, first_name, last_name }
 });
 
-const {data: { getAllMessages }, loading: queryLoading, error: queryError, subscribeToMore} = useQuery(GET_AUDITION_MESSAGES, 
+const { data: { getAllMessages }, loading: queryLoading, error: queryError, subscribeToMore} = useQuery(GET_AUDITION_MESSAGES, 
     {
       variables: { audition_id },
     }
   )
-
-  console.log(getAllMessages)
 
   function renderChatBox(){
     if (toggleOpen) {
@@ -79,7 +77,6 @@ const {data: { getAllMessages }, loading: queryLoading, error: queryError, subsc
       document: MESSAGE_SUBSCRIPTION,
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData) return prev;
-        // console.log(subscriptionData);
         return {
           getAllMessages: [
             ...prev.getAllMessages,
@@ -92,15 +89,18 @@ const {data: { getAllMessages }, loading: queryLoading, error: queryError, subsc
     return () => unsubscribe()
   }, [getAllMessages, subscribeToMore])
 
-
-    return (
-      <div >
-        <div onClick={() => setToggleOpen(!toggleOpen)} className="flex w-full border-4 mt-px">
-          <div>Chat</div>
+    if (queryLoading) return 'Loading...'
+    if (queryError) return queryError
+    if (getAllMessages){
+      return (
+        <div >
+          <div onClick={() => setToggleOpen(!toggleOpen)} className="flex w-full border-4 mt-px">
+            <div>Chat</div>
+          </div>
+          {renderChatBox()}
         </div>
-        {renderChatBox()}
-      </div>
-    );
+      )
+    }
   }
 
 const CREATE_MESSAGE = gql`

@@ -65,6 +65,9 @@ AppointmentScrollTab.propTypes = {
       phone_number: PropTypes.string.isRequired,
       equity: PropTypes.bool.isRequired,
       gender: PropTypes.string.isRequired,
+      birthday: PropTypes.string.isRequired,
+      feet: PropTypes.number.isRequired,
+      inches: PropTypes.number.isRequired,
       monologues: PropTypes.array,
       songs: PropTypes.array,
       key: PropTypes.number

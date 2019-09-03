@@ -6,17 +6,11 @@ import { useQuery } from '@apollo/react-hooks'
 
 export default function UpcomingAppointment(props){
 
-  const {loading, error, data, startPolling, stopPolling, called}  = useQuery(UPCOMING_APPOINTMENT, {
+  const { loading, error, data }  = useQuery(UPCOMING_APPOINTMENT, {
     variables: { audition_id: props.audition_id },
     fetchPolicy: 'network-only',
     // pollInterval: 500,
     onCompleted: () => {
-      // console.log(
-      //   differenceInMinutes(
-      //     new Date(data && data.upcoming_appointment && data.upcoming_appointment.time),
-      //     new Date()
-      //   )
-      // );
       if (data && data.upcoming_appointment) {
         if (
           differenceInMinutes(
@@ -32,29 +26,12 @@ export default function UpcomingAppointment(props){
     }
   });
 
-useEffect(() => {
-  startPolling(5000)
-  stopPolling(() => data.upcoming_appointment === null)
-}, [called, data.upcoming_appointment, startPolling, stopPolling])
-
- 
-
-    //  useEffect(() => {
-    //    console.log(
-    //      differenceInMinutes(
-    //        new Date(data && data.upcoming_appointment && data.upcoming_appointment.time),
-    //        Date.now()
-    //      ) <= 13
-    //    );
-      
-    //  }, [data, networkStatus]);
-
 
   if (loading) return 'Loading...'
   if (error) console.log(error)
   if (data) {
        return (
-         <div className="border border-m-purple-500 bg-white rounded relative h-48 flex flex-col justify-between">
+         <div className="border border-m-purple-500 bg-white rounded relative h-48 flex flex-col justify-between w-full">
            <div
              className="text-lg text-center px-2 py-1 mr-auto rounded border-t-0 border-l-0 border-m-purple-500 border"
              style={{ textShadow: "1px 0px #DCABDF, 1px  1px #fff" }}
