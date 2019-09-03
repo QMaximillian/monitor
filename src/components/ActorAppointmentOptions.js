@@ -22,6 +22,7 @@ console.log(handlePhoneFormat())
           <div className="w-full">
             ActorAppointmentOptions
             {console.log(props)}
+            <img className="h-24 w-24" alt="A user with an appointment to audition" src={selectedActor.profile_uri}/>
             <div>{selectedActor.first_name}</div>
             <div>{selectedActor.last_name}</div>
             <div>{selectedActor.age}</div>

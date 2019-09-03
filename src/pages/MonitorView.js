@@ -91,6 +91,7 @@ const GET_MONITOR_VIEWER_AND_AUDITION = gql`
           feet
           inches
           birthday
+          profile_uri
         }
       }
     }
