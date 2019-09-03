@@ -36,18 +36,6 @@ function AppointmentScrollTab(props){
             </div>
           </div>
           <div>
-            {/* <div className="flex justify-around mb-4">
-              <div>
-                <label className="shadow-lg bg-blue-300 text-white border border-black rounded-lg p-4">
-                  Monologues
-                </label>
-              </div>
-              <div>
-                <label className="shadow-lg bg-blue-300 text-white border border-black rounded-lg p-4">
-                  Songs
-                </label>
-              </div>
-            </div> */}
           </div>
         </div>
       </>
