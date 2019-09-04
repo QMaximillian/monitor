@@ -6,7 +6,7 @@ import AppointmentScrollTab from './AppointmentScrollTab'
 function AppointmentScroll(props){
 
         return (
-            <div className="flex flex-col border border-red-500 w-1/3 overflow-y-scroll relative" style={{height: "94.5vh"}}>
+            <div className="flex flex-col border border-red-500 w-full overflow-y-scroll relative" style={{height: "94.5vh"}}>
               <div className="h-auto">
                 {props.appointments.map(appointment => {
                   return <AppointmentScrollTab key={appointment.id} setSelectedActor={props.setSelectedActor} appointment={appointment} interval={props.interval}/>

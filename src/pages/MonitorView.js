@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import AppointmentScroll from "../components/AppointmentScroll";
 import UpcomingAppointment from '../components/UpcomingAppointment'
 import MessageContainer from "../components/MessageContainer";
-import ActorAppointmentOptions from '../components/ActorAppointmentOptions'
+import ActorAppointmentInfo from '../components/ActorAppointmentInfo'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks';
+import ActorAppointmentOptions from "../components/ActorAppointmentOptions";
 
 
 
@@ -27,29 +28,30 @@ function MonitorView(props){
   if (data && data.viewer && data.audition) {
     return (
       <div className="flex">
-        {/* {upcomingAppointmentData && console.log(upcomingAppointmentData)} */}
-        <AppointmentScroll
-          setSelectedActor={setSelectedActor}
-          appointments={data.audition.appointments}
-          interval={data.audition.interval}
-        />
-        <div className="flex w-full border border-black">
-          <div className="h-full flex flex-row justify-center w-3/4 border border-red-500 relative">
-            <div className="w-full h-64 p-2">
-              <ActorAppointmentOptions selectedActor={selectedActor} />
-            </div>
-            <div className="mr-16 w-64 border border-black absolute bottom-0 right-0">
-              <MessageContainer
-                audition_id={data.audition.id}
-                viewer={data.viewer}
-              />
-            </div>
+        <div className="w-1/4">
+          <AppointmentScroll
+            setSelectedActor={setSelectedActor}
+            appointments={data.audition.appointments}
+            interval={data.audition.interval}
+          />
+        </div>
+        <div className="h-full flex flex-col justify-center w-2/4 border border-red-500 relative">
+          <div className="w-full p-2">
+            <ActorAppointmentInfo selectedActor={selectedActor} />
           </div>
-
-          <div className="w-1/4">
-            <UpcomingAppointment audition_id={props.match.params.id} />
-            <div>HEllo</div>
+          <div>
+            <ActorAppointmentOptions />
           </div>
+          <div className="mr-16 w-64 bg-gray-500 absolute z-10 bottom-0 right-0">
+            <MessageContainer
+              audition_id={data.audition.id}
+              viewer={data.viewer}
+            />
+          </div>
+        </div>
+        <div className="w-1/4">
+          <UpcomingAppointment audition_id={props.match.params.id} />
+          <div>HEllo</div>
         </div>
       </div>
     );

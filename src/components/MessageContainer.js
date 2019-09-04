@@ -93,8 +93,8 @@ const { data: { getAllMessages }, loading: queryLoading, error: queryError, subs
     if (queryError) return queryError
     if (getAllMessages){
       return (
-        <div >
-          <div onClick={() => setToggleOpen(!toggleOpen)} className="flex w-full border-4 mt-px">
+        <div>
+          <div onClick={() => setToggleOpen(!toggleOpen)} className="flex w-full border border-black mt-px">
             <div>Chat</div>
           </div>
           {renderChatBox()}
