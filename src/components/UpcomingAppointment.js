@@ -63,7 +63,7 @@ const UPCOMING_APPOINTMENT = gql`
   query($audition_id: String!) {
       upcoming_appointment(audition_id: $audition_id) {
         id
-        time
+        start_time
         user {
           id
           first_name

@@ -5,7 +5,7 @@ export default function ActorAppointmentInfo(props){
   const { selectedActor } = props;
 
   function handlePhoneFormat(){
-    console.log(selectedActor)
+
     let phone = selectedActor && selectedActor.phone_number.replace(/\D/g, "");
     const match = phone.match(/^(\d{1,3})(\d{0,3})(\d{0,4})$/);
     if (match) {
@@ -74,3 +74,4 @@ export default function ActorAppointmentInfo(props){
 // feet 
 // inches 
 // b-day
+  

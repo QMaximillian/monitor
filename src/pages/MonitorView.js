@@ -84,7 +84,8 @@ const GET_MONITOR_VIEWER_AND_AUDITION = gql`
       zip_code
       appointments {
         id
-        time
+        start_time
+        end_time
         user {
           first_name
           last_name

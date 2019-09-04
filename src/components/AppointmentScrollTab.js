@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types'
-import { addMinutes, format } from 'date-fns'
+import { format } from 'date-fns'
 
 function AppointmentScrollTab(props){
 
@@ -13,13 +13,10 @@ function AppointmentScrollTab(props){
                 <div className="bg-green-500 border border-black shadow rounded-full h-4 w-4 flex justify-center self-center" />
                 <div className="ml-2">
                   {`${format(
-                    props.appointment.time,
+                    props.appointment.start_time,
                     "h:mm a"
                   )} - ${format(
-                    addMinutes(
-                      props.appointment.time,
-                      props.interval
-                    ),
+                      props.appointment.end_time,
                     "h:mm a"
                   )}`}
                 </div>
