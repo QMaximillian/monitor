@@ -3,7 +3,8 @@ import format from 'date-fns/format'
 
 
 export default function ActorAppointmentInfo(props){
-  const { selectedActor } = props;
+  const { selectedAppointment: { user } } = props;
+
 
   function handlePhoneFormat(phone_number){
     let phone = phone_number.replace(/\D/g, "");
@@ -16,35 +17,34 @@ export default function ActorAppointmentInfo(props){
     return phone;
 }
 
-
       
-      if (selectedActor) {
+      if (user) {
         return (
           <div className="w-full h-full flex flex-col justify-between">
             <div className="flex justify-between">
               <div className="items-end">
                 <div>
-                  {`${selectedActor.first_name} ${selectedActor.last_name}, ${selectedActor.age}`}
+                  {`${user.first_name} ${user.last_name}, ${user.age}`}
                 </div>
-                <div>{selectedActor.equity ? "EQUITY" : null}</div>
+                <div>{user.equity ? "EQUITY" : null}</div>
               </div>
               {/* <img
                 className="h-24 w-24 bg-red-500"
                 alt="A user with an appointment to audition"
-                src={selectedActor.profile_uri}
+                src={user.profile_uri}
               /> */}
               <i className="fas fa-user text-6xl"></i>
             </div>
             <div className="flex justify-between">
               <div>
-                <div>{selectedActor.gender}</div>
-                <div>{selectedActor.equity}</div>
-                <div>{`${selectedActor.feet}' ${selectedActor.inches}''`}</div>
-                <div>{format(selectedActor.birthday, "MM/DD/YYYY")}</div>
+                <div>{user.gender}</div>
+                <div>{user.equity}</div>
+                <div>{`${user.feet}' ${user.inches}''`}</div>
+                <div>{format(user.birthday, "MM/DD/YYYY")}</div>
               </div>
               <div className="flex flex-col items-end">
-                <div>{selectedActor.email}</div>
-                <div>{handlePhoneFormat(selectedActor.phone_number)}</div>
+                <div>{user.email}</div>
+                <div>{handlePhoneFormat(user.phone_number)}</div>
               </div>
             </div>
             <div className="flex justify-around mb-4">

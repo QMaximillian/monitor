@@ -14,7 +14,7 @@ import ActorAppointmentOptions from "../components/ActorAppointmentOptions";
 function MonitorView(props){
 
   
-  const [selectedActor, setSelectedActor] = useState('')
+  const [selectedAppointment, setSelectedAppointment] = useState({})
   const { loading, data, error } = useQuery(GET_MONITOR_VIEWER_AND_AUDITION, {
     variables: { audition_id: props.match.params.id }
   });
@@ -30,17 +30,17 @@ function MonitorView(props){
       <div className="flex">
         <div className="w-1/4">
           <AppointmentScroll
-            setSelectedActor={setSelectedActor}
+            setSelectedAppointment={setSelectedAppointment}
             appointments={data.audition.appointments}
             interval={data.audition.interval}
           />
         </div>
         <div className="h-full flex flex-col justify-center w-2/4 border border-red-500 relative">
           <div className="h-auto w-full p-2">
-            <ActorAppointmentInfo selectedActor={selectedActor} />
+            <ActorAppointmentInfo selectedAppointment={selectedAppointment} />
           </div>
           <div className="h-auto w-full">
-            <ActorAppointmentOptions />
+            <ActorAppointmentOptions id={selectedAppointment.id}/>
           </div>
           <div className="mr-16 w-64 bg-gray-500 absolute z-10 bottom-0 right-0">
             <MessageContainer

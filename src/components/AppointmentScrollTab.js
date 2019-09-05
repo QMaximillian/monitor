@@ -6,7 +6,7 @@ function AppointmentScrollTab(props){
 
     return (
       <>
-        <div onClick={() => props.setSelectedActor(props.appointment.user)} className="w-full h-48 justify-between border-black bg-gray-500 border flex flex-col p-2">
+        <div onClick={() => props.setSelectedAppointment(props.appointment)} className="w-full h-48 justify-between border-black bg-gray-500 border flex flex-col p-2">
           <div className="">
             <div className="flex text-xl justify-between">
               <div className="flex">

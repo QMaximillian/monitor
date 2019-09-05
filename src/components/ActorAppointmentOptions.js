@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 export default function ActorAppointmentOptions(props){
-      
+  console.log(props)
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
 
@@ -14,6 +14,22 @@ export default function ActorAppointmentOptions(props){
     { variables: { start_time: startTime, end_time: endTime } }
   );
 
+  const getUTCDate = (dateString = Date.now()) => {
+    const date = new Date(dateString);
+
+    return format(
+      new Date(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate(),
+        date.getUTCHours(),
+        date.getUTCMinutes(),
+        date.getUTCSeconds()
+      ),
+      "YYYY-MM-DDTHH:mm:ss[Z]"
+    );
+  };
+
 
        return (
          <div className="w-full h-full flex flex-col">
@@ -21,14 +37,14 @@ export default function ActorAppointmentOptions(props){
              {/** Set utc formatting for startTime and endTime */}
              <div onClick={() => {
                
-               setStartTime(format(new Date(), ''))
+               setStartTime(getUTCDate());
                
                }}>
                <Button innerText="Start" backgroundColor="bg-green-500" />
              </div>
              <div onClick={() => {
                
-               setEndTime(format(new Date(), ''))
+               setEndTime(getUTCDate());
                
                }}>
                <Button innerText="End" backgroundColor="bg-red-500" />
