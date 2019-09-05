@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import format from 'date-fns/format'
+
 
 export default function ActorAppointmentInfo(props){
   const { selectedActor } = props;
 
-  function handlePhoneFormat(){
-
-    let phone = selectedActor && selectedActor.phone_number.replace(/\D/g, "");
+  function handlePhoneFormat(phone_number){
+    let phone = phone_number.replace(/\D/g, "");
     const match = phone.match(/^(\d{1,3})(\d{0,3})(\d{0,4})$/);
     if (match) {
       phone = `${match[1]}${match[2] ? "-" : ""}${match[2]}${
@@ -28,11 +28,12 @@ export default function ActorAppointmentInfo(props){
                 </div>
                 <div>{selectedActor.equity ? "EQUITY" : null}</div>
               </div>
-              <img
+              {/* <img
                 className="h-24 w-24 bg-red-500"
                 alt="A user with an appointment to audition"
                 src={selectedActor.profile_uri}
-              />
+              /> */}
+              <i className="fas fa-user text-6xl"></i>
             </div>
             <div className="flex justify-between">
               <div>
@@ -43,7 +44,7 @@ export default function ActorAppointmentInfo(props){
               </div>
               <div className="flex flex-col items-end">
                 <div>{selectedActor.email}</div>
-                <div>{handlePhoneFormat()}</div>
+                <div>{handlePhoneFormat(selectedActor.phone_number)}</div>
               </div>
             </div>
             <div className="flex justify-around mb-4">
@@ -74,4 +75,6 @@ export default function ActorAppointmentInfo(props){
 // feet 
 // inches 
 // b-day
+
+
   

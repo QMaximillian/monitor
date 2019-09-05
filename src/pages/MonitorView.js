@@ -36,10 +36,10 @@ function MonitorView(props){
           />
         </div>
         <div className="h-full flex flex-col justify-center w-2/4 border border-red-500 relative">
-          <div className="w-full p-2">
+          <div className="h-auto w-full p-2">
             <ActorAppointmentInfo selectedActor={selectedActor} />
           </div>
-          <div>
+          <div className="h-auto w-full">
             <ActorAppointmentOptions />
           </div>
           <div className="mr-16 w-64 bg-gray-500 absolute z-10 bottom-0 right-0">
@@ -51,7 +51,6 @@ function MonitorView(props){
         </div>
         <div className="w-1/4">
           <UpcomingAppointment audition_id={props.match.params.id} />
-          <div>HEllo</div>
         </div>
       </div>
     );
