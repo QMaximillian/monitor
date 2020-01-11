@@ -5,13 +5,13 @@ import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 export default function ActorAppointmentOptions(props){
-  console.log(props)
-  const [startTime, setStartTime] = useState(null);
-  const [endTime, setEndTime] = useState(null);
+const { id } = props
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
 
   const [actual_start_or_end_mutate, { data, loading, error }] = useMutation(
     ACTUAL_APPOINTMENT_START_OR_END_TIMES,
-    { variables: { start_time: startTime, end_time: endTime } }
+    { variables: { id , actual_start: startTime, actual_end: endTime } }
   );
 
   const getUTCDate = (dateString = Date.now()) => {
@@ -35,18 +35,22 @@ export default function ActorAppointmentOptions(props){
          <div className="w-full h-full flex flex-col">
            <div className="flex justify-around">
              {/** Set utc formatting for startTime and endTime */}
-             <div onClick={() => {
-               
-               setStartTime(getUTCDate());
-               
-               }}>
+             <div
+               onClick={async () => {
+                 await setStartTime(getUTCDate());
+                 actual_start_or_end_mutate();
+                  console.log(id, startTime, endTime);
+               }}
+             >
                <Button innerText="Start" backgroundColor="bg-green-500" />
              </div>
-             <div onClick={() => {
-               
-               setEndTime(getUTCDate());
-               
-               }}>
+             <div
+               onClick={async () => {
+                  await setEndTime(getUTCDate());
+                  actual_start_or_end_mutate();
+                 console.log(id, startTime, endTime)
+               }}
+             >
                <Button innerText="End" backgroundColor="bg-red-500" />
              </div>
            </div>
